@@ -99,3 +99,29 @@ button:active {
   border-radius: 0.4rem;
   border: 1px solid #e6e9ee;
 }
+
+/* 🌙 Style Dark Mode */
+[data-theme="dark"] {
+  background: linear-gradient(to bottom right, #1a1a2e, #16213e);
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] .card-bg {
+  background-color: #2d3748;
+}
+
+[data-theme="dark"] .text-light {
+  color: #a0aec0;
+}
+
+[data-theme="dark"] .text-accent {
+  color: #9f7aea;
+}
+
+[data-theme="dark"] .btn-primary {
+  background-color: #4a5568;
+}
+
+[data-theme="dark"] .btn-primary:hover {
+  background-color: #2d3748;
+}
