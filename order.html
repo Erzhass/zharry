@@ -1,81 +1,52 @@
 <!doctype html>
-<div class="flex items-center gap-4">
-    <button type="submit" class="px-4 py-2 bg-violet-600 text-white rounded-lg">Kirim</button>
-    <button type="button" id="resetForm" class="px-4 py-2 bg-gray-200 rounded-lg">Reset</button>
-</div>
+<html lang="id">
 
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pesan Kopi - KopiGero</title>
 
-<p id="msg" class="mt-4 text-sm text-red-500 hidden"></p>
-</form>
-</main>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
 
+<body class="bg-slate-50 text-slate-900">
+    <header class="bg-violet-600 text-white p-6 shadow-md">
+        <div class="max-w-3xl mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-semibold">Form Pemesanan Kopi</h1>
+            <a href="index.html" class="underline hover:text-violet-200">Kembali</a>
+        </div>
+    </header>
 
-<script>
-    // Ambil query param ?coffee=... untuk prefill
-    function getQueryParam(name) {
-        const params = new URLSearchParams(window.location.search);
-        return params.get(name);
-    }
+    <main class="max-w-3xl mx-auto p-6">
+        <form id="orderForm" class="bg-white p-6 rounded-2xl shadow-lg">
+            <label class="block mb-3">
+                <span class="font-semibold">Nama Pelanggan</span>
+                <input type="text" id="customerName" class="input-field" placeholder="Masukkan nama Anda" required>
+            </label>
 
+            <label class="block mb-3">
+                <span class="font-semibold">Pilih Kopi</span>
+                <select id="coffeeSelect" class="input-field" required>
+                    <option value="">-- Pilih Kopi --</option>
+                    <option value="Cappuccino">Cappuccino</option>
+                    <option value="Latte">Latte</option>
+                    <option value="Americano">Americano</option>
+                    <option value="Mocha">Mocha</option>
+                    <option value="Espresso">Espresso</option>
+                </select>
+            </label>
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const form = document.getElementById('orderForm');
-        const nameInput = document.getElementById('customerName');
-        const coffeeSelect = document.getElementById('coffeeSelect');
-        const qtyInput = document.getElementById('quantity');
-        const msg = document.getElementById('msg');
-        const resetBtn = document.getElementById('resetForm');
+            <label class="block mb-6">
+                <span class="font-semibold">Jumlah</span>
+                <input type="number" id="quantity" class="input-field w-24" value="1" min="1" required>
+            </label>
 
+            <button type="submit" class="btn-primary w-full">Kirim Pesanan</button>
+        </form>
+    </main>
 
-        // Prefill pilihan kopi jika ada di query string
-        const defaultCoffee = getQueryParam('coffee');
-        if (defaultCoffee) {
-            try { coffeeSelect.value = decodeURIComponent(defaultCoffee); } catch (e) { coffeeSelect.value = defaultCoffee; }
-        }
-
-
-        resetBtn.addEventListener('click', function () {
-            form.reset();
-            coffeeSelect.value = '';
-            msg.classList.add('hidden');
-        });
-
-
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            msg.classList.add('hidden');
-
-
-            const name = nameInput.value.trim();
-            const coffee = coffeeSelect.value;
-            const qty = parseInt(qtyInput.value, 10);
-
-
-            if (!name || !coffee || !qty || qty < 1) {
-                msg.textContent = 'Mohon isi semua field dengan benar.';
-                msg.classList.remove('hidden');
-                return;
-            }
-
-
-            // Buat objek pesanan
-            const order = {
-                name: name,
-                coffee: coffee,
-                quantity: qty,
-                timestamp: new Date().toISOString()
-            };
-
-
-            // Simpan ke localStorage sebagai JSON string
-            localStorage.setItem('coffeeOrder', JSON.stringify(order));
-
-
-            // Arahkan ke halaman konfirmasi
-            window.location.href = 'confirm.html';
-        });
-    });
-</script>
+    <script src="assets/js/script.js"></script>
 </body>
 
 </html>

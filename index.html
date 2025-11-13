@@ -1,74 +1,58 @@
 <!doctype html>
-<span class="font-bold">Rp 18.000</span>
-<a href="order.html?coffee=Cappuccino" class="inline-block px-4 py-2 bg-violet-600 text-white rounded-lg">Pesan
-    Sekarang</a>
-</div>
-</article>
+<html lang="id">
 
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>KopiGero - Home</title>
 
-<article class="p-5 bg-white rounded-2xl shadow-md">
-    <h3 class="text-xl font-semibold">Latte</h3>
-    <p class="mt-2 text-slate-500">Lebih banyak susu, lembut dan creamy.</p>
-    <div class="mt-4 flex items-center justify-between">
-        <span class="font-bold">Rp 20.000</span>
-        <a href="order.html?coffee=Latte" class="inline-block px-4 py-2 bg-violet-600 text-white rounded-lg">Pesan
-            Sekarang</a>
-    </div>
-</article>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- CSS tambahan -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
 
-<article class="p-5 bg-white rounded-2xl shadow-md">
-    <h3 class="text-xl font-semibold">Americano</h3>
-    <p class="mt-2 text-slate-500">Espresso ditambah air panas.</p>
-    <div class="mt-4 flex items-center justify-between">
-        <span class="font-bold">Rp 15.000</span>
-        <a href="order.html?coffee=Americano" class="inline-block px-4 py-2 bg-violet-600 text-white rounded-lg">Pesan
-            Sekarang</a>
-    </div>
-</article>
+<body class="bg-slate-50 text-slate-900">
+    <header class="bg-gradient-to-r from-violet-600 to-blue-700 text-white p-6 shadow-lg">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="text-3xl font-bold">☕ KopiGero</h1>
+            <a href="order.html"
+                class="px-4 py-2 bg-white text-violet-700 rounded-lg font-semibold hover:bg-violet-100">Pesan
+                Sekarang</a>
+        </div>
+    </header>
 
+    <main class="max-w-6xl mx-auto p-6">
+        <h2 class="text-2xl font-bold mb-6 text-center">Daftar Menu Kopi</h2>
 
-<!-- tambahkan item lain sesuai kebutuhan -->
-<article class="p-5 bg-white rounded-2xl shadow-md">
-    <h3 class="text-xl font-semibold">Mocha</h3>
-    <p class="mt-2 text-slate-500">Perpaduan cokelat dan espresso.</p>
-    <div class="mt-4 flex items-center justify-between">
-        <span class="font-bold">Rp 22.000</span>
-        <a href="order.html?coffee=Mocha" class="inline-block px-4 py-2 bg-violet-600 text-white rounded-lg">Pesan
-            Sekarang</a>
-    </div>
-</article>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Menu 1 -->
+            <div class="menu-card">
+                <h3 class="menu-title">Cappuccino</h3>
+                <p class="menu-desc">Espresso dengan busa susu lembut.</p>
+                <a href="order.html?coffee=Cappuccino" class="menu-btn">Pesan Sekarang</a>
+            </div>
 
+            <!-- Menu 2 -->
+            <div class="menu-card">
+                <h3 class="menu-title">Latte</h3>
+                <p class="menu-desc">Perpaduan susu dan espresso yang creamy.</p>
+                <a href="order.html?coffee=Latte" class="menu-btn">Pesan Sekarang</a>
+            </div>
 
-<article class="p-5 bg-white rounded-2xl shadow-md">
-    <h3 class="text-xl font-semibold">Espresso</h3>
-    <p class="mt-2 text-slate-500">Kopi pekat, penuh karakter.</p>
-    <div class="mt-4 flex items-center justify-between">
-        <span class="font-bold">Rp 12.000</span>
-        <a href="order.html?coffee=Espresso" class="inline-block px-4 py-2 bg-violet-600 text-white rounded-lg">Pesan
-            Sekarang</a>
-    </div>
-</article>
+            <!-- Menu 3 -->
+            <div class="menu-card">
+                <h3 class="menu-title">Americano</h3>
+                <p class="menu-desc">Espresso dengan tambahan air panas.</p>
+                <a href="order.html?coffee=Americano" class="menu-btn">Pesan Sekarang</a>
+            </div>
+        </div>
+    </main>
 
-
-<article class="p-5 bg-white rounded-2xl shadow-md">
-    <h3 class="text-xl font-semibold">Flat White</h3>
-    <p class="mt-2 text-slate-500">Tekstur susu halus dengan espresso.</p>
-    <div class="mt-4 flex items-center justify-between">
-        <span class="font-bold">Rp 19.000</span>
-        <a href="order.html?coffee=Flat%20White"
-            class="inline-block px-4 py-2 bg-violet-600 text-white rounded-lg">Pesan Sekarang</a>
-    </div>
-</article>
-
-
-</section>
-</main>
-
-
-<footer class="border-t mt-12 py-6">
-    <div class="max-w-5xl mx-auto text-center text-sm text-slate-500">© 2025 KopiGero — Selamat ngopi!</div>
-</footer>
+    <footer class="text-center p-6 text-slate-500 text-sm">
+        © 2025 KopiGero. Semua hak cipta dilindungi.
+    </footer>
 </body>
 
 </html>
