@@ -1,17 +1,17 @@
-// index.js — toggler theme (persist ke localStorage)
+// index.js — Toggle dark mode menggunakan Tailwind
 (function () {
-    const tbtn = document.getElementById("darkModeToggle"); // Diubah agar cocok dengan id di HTML
-    const body = document.body;
+    const tbtn = document.getElementById("darkModeToggle");
+    const html = document.documentElement; // Target <html> untuk class "dark"
 
     function applyTheme(theme) {
-        body.setAttribute("data-theme", theme);
-        localStorage.setItem("theme", theme);
-        // Update teks tombol berdasarkan tema
         if (theme === "dark") {
+            html.classList.add("dark");
             tbtn.textContent = "☀️ Light Mode";
         } else {
+            html.classList.remove("dark");
             tbtn.textContent = "🌙 Dark Mode";
         }
+        localStorage.setItem("theme", theme);
     }
 
     // Terapkan tema yang tersimpan saat halaman dimuat
@@ -21,7 +21,7 @@
     // Event listener untuk toggle
     if (tbtn) {
         tbtn.addEventListener("click", () => {
-            const currentTheme = body.getAttribute("data-theme");
+            const currentTheme = html.classList.contains("dark") ? "dark" : "light";
             const nextTheme = currentTheme === "light" ? "dark" : "light";
             applyTheme(nextTheme);
         });
