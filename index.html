@@ -6,36 +6,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kedai Kopi Mantap</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/style/style.css" />
 </head>
 
-<body data-theme="light"
-    class="transition-all duration-500 min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 text-gray-800">
+<body class="bg-gradient-to-br from-purple-50 to-blue-50 text-gray-800 transition-all duration-500">
 
-    <!-- 🔘 Tombol toggle di kanan atas -->
-    <div class="absolute top-5 right-6">
+    <header class="text-center py-10">
+        <h1 class="text-4xl font-bold text-purple-700">☕ Kedai Kopi Mantap</h1>
+        <p class="text-gray-500 mt-2">Temani harimu dengan secangkir kebahagiaan</p>
         <button id="darkModeToggle"
-            class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">
+            class="mt-4 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-800 transition-all">
             🌙 Dark Mode
         </button>
-    </div>
-
-    <header class="text-center pt-20 pb-10">
-        <h1 class="text-4xl font-bold text-purple-700 dark:text-purple-300">☕ Kedai Kopi Mantap</h1>
-        <p class="text-gray-500 mt-2 dark:text-gray-400">Temani harimu dengan secangkir kebahagiaan</p>
     </header>
 
     <section class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-6">
-        <div
-            class="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 dark:bg-gray-800">
+        <!-- Card Menu -->
+        <div class="menu-card">
             <img src="assets/img/cappucino.jpeg" alt="Cappuccino" class="w-full h-48 object-cover">
             <div class="p-4">
-                <h2 class="text-xl font-bold dark:text-white">Cappuccino</h2>
-                <p class="text-gray-500 text-sm dark:text-gray-400">Perpaduan espresso, susu, dan foam lembut.</p>
-                <p class="font-semibold mt-2 text-purple-600 dark:text-purple-300">Rp 25.000</p>
-                <a href="order.html?coffee=Cappuccino&price=25000"
-                    class="block mt-3 text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">Pesan</a>
+                <h2 class="text-xl font-bold">Cappuccino</h2>
+                <p class="text-gray-500 text-sm">Perpaduan espresso, susu, dan foam lembut.</p>
+                <p class="font-semibold mt-2 text-purple-600">Rp 25.000</p>
+                <a href="order.html?coffee=Cappuccino&price=25000" class="pesan-btn">Pesan</a>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="assets/img/latte.jpeg" alt="Latte" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h2 class="text-xl font-bold">Latte</h2>
+                <p class="text-gray-500 text-sm">Kopi dengan susu lembut untuk rasa ringan.</p>
+                <p class="font-semibold mt-2 text-purple-600">Rp 27.000</p>
+                <a href="order.html?coffee=Latte&price=27000" class="pesan-btn">Pesan</a>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="assets/img/americano.jpeg" alt="Americano" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h2 class="text-xl font-bold">Americano</h2>
+                <p class="text-gray-500 text-sm">Espresso murni dengan air panas.</p>
+                <p class="font-semibold mt-2 text-purple-600">Rp 22.000</p>
+                <a href="order.html?coffee=Americano&price=22000" class="pesan-btn">Pesan</a>
             </div>
         </div>
     </section>

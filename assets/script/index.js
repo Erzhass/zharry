@@ -1,26 +1,21 @@
-(function () {
-  const btn = document.getElementById("darkModeToggle");
-  const body = document.body;
+const toggleButton = document.getElementById("darkModeToggle");
+const body = document.body;
 
-  function applyTheme(theme) {
-    if (theme === "dark") {
-      body.setAttribute("data-theme", "dark");
-      body.classList.add("dark"); // untuk Tailwind
-      btn.textContent = "☀️ Light Mode";
-    } else {
-      body.setAttribute("data-theme", "light");
-      body.classList.remove("dark");
-      btn.textContent = "🌙 Dark Mode";
-    }
-    localStorage.setItem("theme", theme);
+// Cek mode sebelumnya di localStorage
+if (localStorage.getItem("theme") === "dark") {
+  body.classList.add("dark");
+  toggleButton.textContent = "☀️ Light Mode";
+}
+
+// Event klik tombol
+toggleButton.addEventListener("click", () => {
+  body.classList.toggle("dark");
+
+  if (body.classList.contains("dark")) {
+    toggleButton.textContent = "☀️ Light Mode";
+    localStorage.setItem("theme", "dark");
+  } else {
+    toggleButton.textContent = "🌙 Dark Mode";
+    localStorage.setItem("theme", "light");
   }
-
-  const savedTheme = localStorage.getItem("theme") || "light";
-  applyTheme(savedTheme);
-
-  btn.addEventListener("click", () => {
-    const current = body.getAttribute("data-theme");
-    const next = current === "light" ? "dark" : "light";
-    applyTheme(next);
-  });
-})();
+});
