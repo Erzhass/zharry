@@ -1,0 +1,29 @@
+/* style.css — tambahan untuk mempercantik tampilan */
+
+.menu-card {
+  @apply bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300;
+}
+
+.menu-title {
+  @apply text-xl font-semibold text-violet-700;
+}
+
+.menu-desc {
+  @apply mt-2 text-slate-600 text-sm;
+}
+
+.menu-btn {
+  @apply inline-block mt-4 px-4 py-2 bg-violet-600 text-white rounded-lg font-semibold hover:bg-violet-700 transition;
+}
+
+.input-field {
+  @apply w-full mt-1 rounded-lg border border-gray-200 p-2 focus:outline-none focus:ring-2 focus:ring-violet-500;
+}
+
+.btn-primary {
+  @apply bg-violet-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-violet-700 transition;
+}
+
+.btn-secondary {
+  @apply bg-gray-200 text-slate-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-300 transition;
+}
