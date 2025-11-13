@@ -6,43 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kedai Kopi Mantap</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="assets/script/index.js">
-    <style>
-        /* Custom CSS untuk dark mode berdasarkan data-theme */
-        [data-theme="dark"] {
-            background: linear-gradient(to bottom right, #1a1a2e, #16213e);
-            color: #e2e8f0;
-        }
-        [data-theme="dark"] .card-bg {
-            background-color: #2d3748;
-        }
-        [data-theme="dark"] .text-light {
-            color: #a0aec0;
-        }
-        [data-theme="dark"] .text-accent {
-            color: #9f7aea;
-        }
-        [data-theme="dark"] .btn-primary {
-            background-color: #4a5568;
-        }
-        [data-theme="dark"] .btn-primary:hover {
-            background-color: #2d3748;
-        }
-    </style>
+
+    <!-- Hubungkan CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body
-    class="bg-gradient-to-br from-purple-50 to-blue-50 text-gray-800 transition-all duration-500">
-    <!-- Note: Saya menghapus class dark:bg-gray-900 dari body karena kita menggunakan data-theme untuk kontrol manual -->
+<body class="bg-gradient-to-br from-purple-50 to-blue-50 text-gray-800 transition-all duration-500" data-theme="light">
+
     <header class="text-center py-10">
         <h1 class="text-4xl font-bold text-purple-700 dark:text-purple-300">☕ Kedai Kopi Mantap</h1>
         <p class="text-gray-500 mt-2 dark:text-gray-400">Temani harimu dengan secangkir kebahagiaan</p>
         <button id="darkModeToggle"
-            class="mt-4 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">🌙 Dark Mode</button>
+            class="mt-4 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">🌙
+            Dark Mode</button>
     </header>
 
     <section class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-6">
-        <!-- Card Menu -->
+
+        <!-- ☕ Card Menu -->
         <div
             class="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 dark:bg-gray-800">
             <img src="assets/img/cappucino.jpeg" alt="Cappuccino" class="w-full h-48 object-cover">
@@ -55,64 +36,11 @@
             </div>
         </div>
 
-        <div
-            class="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 dark:bg-gray-800">
-            <img src="assets/img/latte.jpeg" alt="Latte" class="w-full h-48 object-cover">
-            <div class="p-4">
-                <h2 class="text-xl font-bold dark:text-white">Latte</h2>
-                <p class="text-gray-500 text-sm dark:text-gray-400">Kopi dengan susu lembut untuk rasa ringan.</p>
-                <p class="font-semibold mt-2 text-purple-600 dark:text-purple-300">Rp 27.000</p>
-                <a href="order.html?coffee=Latte&price=27000"
-                    class="block mt-3 text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">Pesan</a>
-            </div>
-        </div>
-
-        <div
-            class="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 dark:bg-gray-800">
-            <img src="assets/img/americano.jpeg" alt="Americano" class="w-full h-48 object-cover">
-            <div class="p-4">
-                <h2 class="text-xl font-bold dark:text-white">Americano</h2>
-                <p class="text-gray-500 text-sm dark:text-gray-400">Espresso murni dengan air panas.</p>
-                <p class="font-semibold mt-2 text-purple-600 dark:text-purple-300">Rp 22.000</p>
-                <a href="order.html?coffee=Americano&price=22000"
-                    class="block mt-3 text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">Pesan</a>
-            </div>
-        </div>
+        <!-- Tambahkan kartu lain -->
     </section>
 
-    <script>
-        // index.js — toggler theme (persist ke localStorage)
-        (function () {
-            const tbtn = document.getElementById("darkModeToggle"); // Diubah agar cocok dengan id di HTML
-            const body = document.body;
-
-            function applyTheme(theme) {
-                if (theme === "dark") {
-                    body.classList.add("dark");
-                    body.setAttribute("data-theme", "dark");
-                    tbtn.textContent = "☀️ Light Mode";
-                } else {
-                    body.classList.remove("dark");
-                    body.setAttribute("data-theme", "light");
-                    tbtn.textContent = "🌙 Dark Mode";
-                }
-                localStorage.setItem("theme", theme);
-            }
-
-            // Terapkan tema yang tersimpan saat halaman dimuat
-            const saved = localStorage.getItem("theme") || "light";
-            applyTheme(saved);
-
-            // Event listener untuk toggle
-            if (tbtn) {
-                tbtn.addEventListener("click", () => {
-                    const currentTheme = body.getAttribute("data-theme");
-                    const nextTheme = currentTheme === "light" ? "dark" : "light";
-                    applyTheme(nextTheme);
-                });
-            }
-        })();
-    </script>
+    <!-- Hubungkan JavaScript -->
+    <script src="assets/script/index.js"></script>
 </body>
 
 </html>
