@@ -1,15 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=<h>, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Mewah</title>
+    <link rel="stylesheet" href="style/style.css">
 </head>
-
 <body>
-    <h1>Hello World</h1>
-    <h2>roti</h2>
-</body>
+    <div class="particles" id="particles"></div>
+    <div class="login-container">
+        <h2>Web Ferzha</h2>
+        <form>
+            <div class="input-group">
+                <input type="text" placeholder="Username" required>
+            </div>
+            <div class="input-group">
+                <input type="password" placeholder="Password" required>
+            </div>
+            <button type="submit">Masuk</button>
+        </form>
+        <a href="#" class="forgot-password">Lupa Password?</a>
+    </div>
 
+    <script>
+        // Animasi partikel latar belakang
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.width = Math.random() * 10 + 5 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.animationDelay = Math.random() * 6 + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Animasi tombol saat diklik
+        const button = document.querySelector('button');
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            button.innerHTML = 'Memproses...';
+            setTimeout(() => {
+                button.innerHTML = 'Masuk';
+                alert('Login berhasil! (Ini simulasi)');
+            }, 2000);
+        });
+    </script>
+</body>
 </html>
