@@ -11,19 +11,19 @@
 
 <body class="bg-gradient-to-br from-purple-50 to-indigo-100 min-h-screen flex flex-col">
 
-    <header class="bg-indigo-700 text-white py-4 shadow-md">
-        <h1 class="text-center text-2xl font-bold">Konfirmasi Pesanan ☕</h1>
+    <header class="bg-indigo-700 text-white py-4 shadow-md text-center text-2xl font-bold">
+        Konfirmasi Pesanan ☕
     </header>
 
     <main class="flex-grow container mx-auto p-6">
-        <div class="bg-white rounded-xl shadow-lg p-6">
+        <div class="bg-white shadow-lg rounded-xl p-6">
             <h2 class="text-xl font-semibold text-indigo-800 mb-4">Ringkasan Pesanan</h2>
 
             <div class="overflow-x-auto">
-                <table class="min-w-full border border-gray-200 rounded-lg">
+                <table class="min-w-full border border-gray-300 rounded-lg">
                     <thead class="bg-indigo-600 text-white">
                         <tr>
-                            <th class="py-2 px-3 text-left">Kopi</th>
+                            <th class="py-2 px-3 text-left">Nama Kopi</th>
                             <th class="py-2 px-3 text-left">Jumlah</th>
                             <th class="py-2 px-3 text-left">Subtotal</th>
                         </tr>
@@ -35,17 +35,17 @@
             <p class="text-lg font-semibold text-indigo-700 mt-4">Total: <span id="confirmTotal">Rp0</span></p>
 
             <div class="mt-6 flex justify-between">
-                <button id="backBtn" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">Kembali untuk
-                    Edit</button>
+                <button id="backBtn"
+                    class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">Kembali</button>
                 <button id="confirmBtn"
                     class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">Konfirmasi Pesanan</button>
             </div>
         </div>
     </main>
 
-    <footer class="text-center py-4 text-gray-600 text-sm">© 2025 Kedai Kopi Kamu</footer>
+    <footer class="text-center py-4 text-gray-500 text-sm">© 2025 Kedai Kopi Kamu</footer>
 
-    <script src="assets/js/confirm.js"></script>
+    <script src="script/confirm.js"></script>
 </body>
 
 </html>
