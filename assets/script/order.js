@@ -6,8 +6,55 @@ const clearAllBtn = document.getElementById("clearAll");
 const resetFormBtn = document.getElementById("resetForm");
 const nextConfirmBtn = document.getElementById("nextConfirm");
 
+// Elemen modal
+const customModal = document.getElementById("customModal");
+const modalMessage = document.getElementById("modalMessage");
+const modalButtons = document.getElementById("modalButtons");
+
 // Ambil data dari localStorage (kalau ada)
 let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+// Fungsi untuk menampilkan modal kustom
+function showModal(message, isConfirm = false, onConfirm = null) {
+  modalMessage.innerHTML = message; // Gunakan innerHTML untuk mendukung ikon
+  modalButtons.innerHTML = "";
+
+  if (isConfirm) {
+    // Tombol untuk konfirmasi (Ya/Tidak)
+    modalButtons.innerHTML = `
+      <button id="modalYes" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-all font-semibold">Ya</button>
+      <button id="modalNo" class="bg-gray-400 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-all font-semibold">Tidak</button>
+    `;
+    document.getElementById("modalYes").addEventListener("click", () => {
+      if (onConfirm) onConfirm();
+      closeModal();
+    });
+    document.getElementById("modalNo").addEventListener("click", closeModal);
+  } else {
+    // Tombol OK untuk pesan error
+    modalButtons.innerHTML = `
+      <button id="modalOk" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-all font-semibold">OK</button>
+    `;
+    document.getElementById("modalOk").addEventListener("click", closeModal);
+  }
+
+  // Tampilkan modal dengan animasi
+  customModal.classList.remove("hidden");
+  setTimeout(() => {
+    customModal.classList.add("opacity-100");
+    customModal.querySelector("div").classList.remove("scale-95");
+  }, 10);
+}
+
+// Fungsi untuk menutup modal
+function closeModal() {
+  customModal.classList.add("opacity-0");
+  customModal.querySelector("div").classList.add("scale-95");
+  setTimeout(() => {
+    customModal.classList.add("hidden");
+    customModal.classList.remove("opacity-100");
+  }, 300);
+}
 
 // Tambah pesanan baru
 orderForm.addEventListener("submit", (e) => {
@@ -19,7 +66,7 @@ orderForm.addEventListener("submit", (e) => {
   const qty = parseInt(document.getElementById("quantity").value);
 
   if (!qty || qty <= 0) {
-    alert("Jumlah pesanan tidak boleh kosong!");
+    showModal("Jumlah pesanan tidak boleh kosong! <span class='text-red-500 text-2xl'>❗</span>", false);
     return;
   }
 
@@ -85,7 +132,7 @@ function renderOrders() {
 // Update jumlah pesanan
 window.updateQty = function (index, newQty) {
   if (newQty <= 0) {
-    alert("Jumlah harus minimal 1!");
+    showModal("Jumlah pesanan tidak boleh kosong! <span class='text-red-500 text-2xl'>❗</span>", false);
     return;
   }
   orders[index].qty = parseInt(newQty);
@@ -106,11 +153,11 @@ window.deleteOrder = function (index) {
 
 // Hapus semua pesanan
 clearAllBtn.addEventListener("click", () => {
-  if (confirm("Yakin mau menghapus semua pesanan?")) {
+  showModal("Yakin mau menghapus semua pesanan? <span class='text-yellow-500 text-2xl'>❓</span>", true, () => {
     orders = [];
     localStorage.removeItem("orders");
     renderOrders();
-  }
+  });
 });
 
 // Reset form input
@@ -121,7 +168,7 @@ resetFormBtn.addEventListener("click", () => {
 // Lanjut ke halaman konfirmasi
 nextConfirmBtn.addEventListener("click", () => {
   if (orders.length === 0) {
-    alert("Belum ada pesanan yang ditambahkan!");
+    showModal("Belum ada pesanan yang ditambahkan! <span class='text-red-500 text-2xl'>❗</span>", false);
     return;
   }
   window.location.href = "confirm.html";
