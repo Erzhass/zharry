@@ -1,4 +1,4 @@
 # zharry
 
-Web lomba
+Web lombag
 hai Ferzha
