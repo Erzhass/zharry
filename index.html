@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kedai Kopi Mantap</title>
     <script src="https://cdn.tailwindcss.com"></script>
-      <style>
+    <style>
         /* Custom CSS untuk dark mode berdasarkan data-theme */
         [data-theme="dark"] {
             background: linear-gradient(to bottom right, #1a1a2e, #16213e);
@@ -31,13 +31,13 @@
 </head>
 
 <body
-    class="bg-gradient-to-br from-purple-50 to-blue-50 text-gray-800 transition-all duration-500 dark:bg-gray-900 dark:text-gray-100">
+    class="bg-gradient-to-br from-purple-50 to-blue-50 text-gray-800 transition-all duration-500">
+    <!-- Note: Saya menghapus class dark:bg-gray-900 dari body karena kita menggunakan data-theme untuk kontrol manual -->
     <header class="text-center py-10">
         <h1 class="text-4xl font-bold text-purple-700">☕ Kedai Kopi Mantap</h1>
         <p class="text-gray-500 mt-2">Temani harimu dengan secangkir kebahagiaan</p>
         <button id="darkModeToggle"
-            class="mt-4 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-800 transition-all">🌙 Dark
-            Mode</button>
+            class="mt-4 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-800 transition-all">🌙 Dark Mode</button>
     </header>
 
     <section class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-6">
@@ -80,24 +80,34 @@
     </section>
 
     <script>
-          // index.js — toggler theme (persist ke localStorage)
+        // index.js — toggler theme (persist ke localStorage)
         (function () {
-          const tbtn = document.getElementById("toggleTheme");
-          const root = document.documentElement;
-          const body = document.body;
-          function applyTheme(theme) {
-            body.setAttribute("data-theme", theme);
-            localStorage.setItem("theme", theme);
-          }
-          const saved = localStorage.getItem("theme") || "light";
-          applyTheme(saved);
-          if (tbtn) {
-            tbtn.addEventListener("click", () => {
-              const next =
-                body.getAttribute("data-theme") === "light" ? "dark" : "light";
-              applyTheme(next);
-            });
-          }
+            const tbtn = document.getElementById("darkModeToggle"); // Diubah agar cocok dengan id di HTML
+            const body = document.body;
+
+            function applyTheme(theme) {
+                body.setAttribute("data-theme", theme);
+                localStorage.setItem("theme", theme);
+                // Update teks tombol berdasarkan tema
+                if (theme === "dark") {
+                    tbtn.textContent = "☀️ Light Mode";
+                } else {
+                    tbtn.textContent = "🌙 Dark Mode";
+                }
+            }
+
+            // Terapkan tema yang tersimpan saat halaman dimuat
+            const saved = localStorage.getItem("theme") || "light";
+            applyTheme(saved);
+
+            // Event listener untuk toggle
+            if (tbtn) {
+                tbtn.addEventListener("click", () => {
+                    const currentTheme = body.getAttribute("data-theme");
+                    const nextTheme = currentTheme === "light" ? "dark" : "light";
+                    applyTheme(nextTheme);
+                });
+            }
         })();
     </script>
 </body>
