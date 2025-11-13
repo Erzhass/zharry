@@ -25,10 +25,12 @@ function renderConfirm() {
   confirmTotal.textContent = `Rp${total.toLocaleString()}`;
 }
 
+// Tombol kembali
 backBtn.addEventListener("click", () => {
   window.location.href = "order.html";
 });
 
+// Tombol konfirmasi
 confirmBtn.addEventListener("click", () => {
   alert("✅ Pesanan berhasil dikirim!");
   localStorage.removeItem("orders");
