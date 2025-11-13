@@ -7,23 +7,26 @@
     <title>Kedai Kopi Mantap</title>
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Hubungkan CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body class="bg-gradient-to-br from-purple-50 to-blue-50 text-gray-800 transition-all duration-500" data-theme="light">
+<body data-theme="light"
+    class="transition-all duration-500 min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 text-gray-800">
 
-    <header class="text-center py-10">
+    <!-- 🔘 Tombol toggle di kanan atas -->
+    <div class="absolute top-5 right-6">
+        <button id="darkModeToggle"
+            class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">
+            🌙 Dark Mode
+        </button>
+    </div>
+
+    <header class="text-center pt-20 pb-10">
         <h1 class="text-4xl font-bold text-purple-700 dark:text-purple-300">☕ Kedai Kopi Mantap</h1>
         <p class="text-gray-500 mt-2 dark:text-gray-400">Temani harimu dengan secangkir kebahagiaan</p>
-        <button id="darkModeToggle"
-            class="mt-4 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">🌙
-            Dark Mode</button>
     </header>
 
     <section class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-6">
-
-        <!-- ☕ Card Menu -->
         <div
             class="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 dark:bg-gray-800">
             <img src="assets/img/cappucino.jpeg" alt="Cappuccino" class="w-full h-48 object-cover">
@@ -35,11 +38,8 @@
                     class="block mt-3 text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">Pesan</a>
             </div>
         </div>
-
-        <!-- Tambahkan kartu lain -->
     </section>
 
-    <!-- Hubungkan JavaScript -->
     <script src="assets/script/index.js"></script>
 </body>
 
