@@ -125,3 +125,62 @@ button:active {
 [data-theme="dark"] .btn-primary:hover {
   background-color: #2d3748;
 }
+
+/* --- DARK MODE STYLE --- */
+body.dark {
+  background: linear-gradient(to bottom right, #1f1f1f, #2c2c54);
+  color: #f5f5f5;
+  transition: background 0.5s, color 0.5s;
+}
+
+/* Header */
+body.dark h1 {
+  color: #d1b3ff;
+}
+body.dark p {
+  color: #b3b3b3;
+}
+
+/* Card menu */
+.menu-card {
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+.menu-card:hover {
+  transform: scale(1.05);
+}
+body.dark .menu-card {
+  background-color: #2a2a40;
+}
+
+/* Tombol Pesan */
+.pesan-btn {
+  display: block;
+  margin-top: 12px;
+  text-align: center;
+  background-color: #7e22ce;
+  color: white;
+  padding: 8px 0;
+  border-radius: 0.5rem;
+  transition: background 0.3s;
+}
+.pesan-btn:hover {
+  background-color: #581c87;
+}
+body.dark .pesan-btn {
+  background-color: #8b5cf6;
+}
+body.dark .pesan-btn:hover {
+  background-color: #6d28d9;
+}
+
+/* Tombol toggle dark mode */
+body.dark button {
+  background-color: #8b5cf6;
+}
+body.dark button:hover {
+  background-color: #6d28d9;
+}
