@@ -57,18 +57,32 @@
         </div>
     </section>
 
-    <script>  // Simpan status di localStorage
+    <script>
         const toggle = document.getElementById('darkModeToggle');
+        
+        // Fungsi untuk update teks tombol berdasarkan mode
+        function updateToggleText() {
+            if (document.body.classList.contains('dark')) {
+                toggle.textContent = '☀️ Light Mode';
+            } else {
+                toggle.textContent = '🌙 Dark Mode';
+            }
+        }
+        
+        // Cek status dari localStorage saat halaman dimuat
         const isDark = localStorage.getItem('darkMode') === 'true';
         if (isDark) {
-      document.body.classList.add('dark');
-    }
-
-  toggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-      localStorage.setItem('darkMode', document.body.classList.contains('dark'));
-  });
-  </script>
+            document.body.classList.add('dark');
+        }
+        updateToggleText();  // Update teks tombol saat load
+        
+        // Event listener untuk toggle
+        toggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark'));
+            updateToggleText();  // Update teks setelah toggle
+        });
+    </script>
 </body>
 
 </html>
