@@ -1,0 +1,81 @@
+<!doctype html>
+<div class="flex items-center gap-4">
+    <button type="submit" class="px-4 py-2 bg-violet-600 text-white rounded-lg">Kirim</button>
+    <button type="button" id="resetForm" class="px-4 py-2 bg-gray-200 rounded-lg">Reset</button>
+</div>
+
+
+<p id="msg" class="mt-4 text-sm text-red-500 hidden"></p>
+</form>
+</main>
+
+
+<script>
+    // Ambil query param ?coffee=... untuk prefill
+    function getQueryParam(name) {
+        const params = new URLSearchParams(window.location.search);
+        return params.get(name);
+    }
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('orderForm');
+        const nameInput = document.getElementById('customerName');
+        const coffeeSelect = document.getElementById('coffeeSelect');
+        const qtyInput = document.getElementById('quantity');
+        const msg = document.getElementById('msg');
+        const resetBtn = document.getElementById('resetForm');
+
+
+        // Prefill pilihan kopi jika ada di query string
+        const defaultCoffee = getQueryParam('coffee');
+        if (defaultCoffee) {
+            try { coffeeSelect.value = decodeURIComponent(defaultCoffee); } catch (e) { coffeeSelect.value = defaultCoffee; }
+        }
+
+
+        resetBtn.addEventListener('click', function () {
+            form.reset();
+            coffeeSelect.value = '';
+            msg.classList.add('hidden');
+        });
+
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            msg.classList.add('hidden');
+
+
+            const name = nameInput.value.trim();
+            const coffee = coffeeSelect.value;
+            const qty = parseInt(qtyInput.value, 10);
+
+
+            if (!name || !coffee || !qty || qty < 1) {
+                msg.textContent = 'Mohon isi semua field dengan benar.';
+                msg.classList.remove('hidden');
+                return;
+            }
+
+
+            // Buat objek pesanan
+            const order = {
+                name: name,
+                coffee: coffee,
+                quantity: qty,
+                timestamp: new Date().toISOString()
+            };
+
+
+            // Simpan ke localStorage sebagai JSON string
+            localStorage.setItem('coffeeOrder', JSON.stringify(order));
+
+
+            // Arahkan ke halaman konfirmasi
+            window.location.href = 'confirm.html';
+        });
+    });
+</script>
+</body>
+
+</html>
