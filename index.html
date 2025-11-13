@@ -3,56 +3,98 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>KopiGero - Home</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>KopiKita — Menu</title>
 
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- CSS tambahan -->
+    <!-- jsPDF (untuk confirm) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- custom css -->
     <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
-<body class="bg-slate-50 text-slate-900">
-    <header class="bg-gradient-to-r from-violet-600 to-blue-700 text-white p-6 shadow-lg">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <h1 class="text-3xl font-bold">☕ KopiGero</h1>
-            <a href="order.html"
-                class="px-4 py-2 bg-white text-violet-700 rounded-lg font-semibold hover:bg-violet-100">Pesan
-                Sekarang</a>
-        </div>
-    </header>
+<body class="bg-cream min-h-screen text-slate-900 transition-colors duration-300" data-theme="light">
 
-    <main class="max-w-6xl mx-auto p-6">
-        <h2 class="text-2xl font-bold mb-6 text-center">Daftar Menu Kopi</h2>
-
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Menu 1 -->
-            <div class="menu-card">
-                <h3 class="menu-title">Cappuccino</h3>
-                <p class="menu-desc">Espresso dengan busa susu lembut.</p>
-                <a href="order.html?coffee=Cappuccino" class="menu-btn">Pesan Sekarang</a>
+    <nav class="bg-gradient-to-r from-violet-600 to-indigo-600 text-white p-4 shadow">
+        <div class="container mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="text-2xl font-extrabold">☕ KopiKita</div>
+                <span class="text-sm opacity-80">Fresh. Cozy. Fast.</span>
             </div>
 
-            <!-- Menu 2 -->
-            <div class="menu-card">
-                <h3 class="menu-title">Latte</h3>
-                <p class="menu-desc">Perpaduan susu dan espresso yang creamy.</p>
-                <a href="order.html?coffee=Latte" class="menu-btn">Pesan Sekarang</a>
-            </div>
-
-            <!-- Menu 3 -->
-            <div class="menu-card">
-                <h3 class="menu-title">Americano</h3>
-                <p class="menu-desc">Espresso dengan tambahan air panas.</p>
-                <a href="order.html?coffee=Americano" class="menu-btn">Pesan Sekarang</a>
+            <div class="flex items-center gap-3">
+                <button id="toggleTheme" class="p-2 rounded-md hover:bg-white/10 transition"
+                    title="Toggle dark mode">🌓</button>
+                <a href="order.html"
+                    class="bg-white text-indigo-700 px-3 py-2 rounded-lg font-semibold shadow hover:scale-[1.02] transition">Pesan
+                    Sekarang</a>
             </div>
         </div>
+    </nav>
+
+    <main class="container mx-auto p-6">
+        <header class="mb-6">
+            <h1 class="text-3xl font-bold text-indigo-800">Menu Pilihan</h1>
+            <p class="text-slate-600">Pilih kopi favoritmu — klik <span class="font-semibold">Pesan</span> untuk
+                memesan.</p>
+        </header>
+
+        <section id="menuGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Card contoh; copy / ubah sesuai inventory -->
+            <article
+                class="card group bg-white rounded-2xl shadow-md overflow-hidden transform transition hover:scale-105">
+                <img src="assets/img/cappuccino.jpg" alt="Cappuccino" class="w-full h-44 object-cover">
+                <div class="p-4">
+                    <h3 class="font-bold text-lg text-indigo-800">Cappuccino</h3>
+                    <p class="mt-2 text-sm text-slate-600">Espresso lembut dengan busa susu krim.</p>
+                    <div class="mt-4 flex items-center justify-between">
+                        <div class="text-xl font-semibold text-indigo-700">Rp25.000</div>
+                        <a href="order.html?coffee=Cappuccino"
+                            class="btn-order inline-block px-4 py-2 rounded-lg font-semibold">Pesan</a>
+                    </div>
+                </div>
+            </article>
+
+            <article
+                class="card group bg-white rounded-2xl shadow-md overflow-hidden transform transition hover:scale-105">
+                <img src="assets/img/latte.jpg" alt="Latte" class="w-full h-44 object-cover">
+                <div class="p-4">
+                    <h3 class="font-bold text-lg text-indigo-800">Latte</h3>
+                    <p class="mt-2 text-sm text-slate-600">Smooth latte dengan susu steamed.</p>
+                    <div class="mt-4 flex items-center justify-between">
+                        <div class="text-xl font-semibold text-indigo-700">Rp27.000</div>
+                        <a href="order.html?coffee=Latte"
+                            class="btn-order inline-block px-4 py-2 rounded-lg font-semibold">Pesan</a>
+                    </div>
+                </div>
+            </article>
+
+            <article
+                class="card group bg-white rounded-2xl shadow-md overflow-hidden transform transition hover:scale-105">
+                <img src="assets/img/americano.jpg" alt="Americano" class="w-full h-44 object-cover">
+                <div class="p-4">
+                    <h3 class="font-bold text-lg text-indigo-800">Americano</h3>
+                    <p class="mt-2 text-sm text-slate-600">Espresso dengan tambahan air panas.</p>
+                    <div class="mt-4 flex items-center justify-between">
+                        <div class="text-xl font-semibold text-indigo-700">Rp23.000</div>
+                        <a href="order.html?coffee=Americano"
+                            class="btn-order inline-block px-4 py-2 rounded-lg font-semibold">Pesan</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Tambah card lain sesuai kebutuhan -->
+        </section>
     </main>
 
-    <footer class="text-center p-6 text-slate-500 text-sm">
-        © 2025 KopiGero. Semua hak cipta dilindungi.
+    <footer class="py-6 text-center text-sm text-slate-600">
+        © 2025 KopiKita — Good cup, good day.
     </footer>
+
+    <script src="assets/js/index.js"></script>
 </body>
 
 </html>
