@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id" class=""> <!-- Tambahkan class="" untuk Tailwind dark mode -->
+<html lang="id">
 
 <head>
     <meta charset="UTF-8" />
@@ -7,76 +7,93 @@
     <title>Kedai Kopi Mantap</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom CSS untuk gradient background (opsional, bisa dihapus jika ingin sepenuhnya Tailwind) */
-        body {
-            transition: background 0.5s ease, color 0.5s ease;
-        }
-        [data-theme="dark"] body {
+        /* Custom CSS untuk dark mode berdasarkan data-theme */
+        [data-theme="dark"] {
             background: linear-gradient(to bottom right, #1a1a2e, #16213e);
             color: #e2e8f0;
+        }
+        [data-theme="dark"] .card-bg {
+            background-color: #2d3748;
+        }
+        [data-theme="dark"] .text-light {
+            color: #a0aec0;
+        }
+        [data-theme="dark"] .text-accent {
+            color: #9f7aea;
+        }
+        [data-theme="dark"] .btn-primary {
+            background-color: #4a5568;
+        }
+        [data-theme="dark"] .btn-primary:hover {
+            background-color: #2d3748;
         }
     </style>
 </head>
 
-<body class="bg-gradient-to-br from-purple-50 to-blue-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-all duration-500">
+<body
+    class="bg-gradient-to-br from-purple-50 to-blue-50 text-gray-800 transition-all duration-500">
+    <!-- Note: Saya menghapus class dark:bg-gray-900 dari body karena kita menggunakan data-theme untuk kontrol manual -->
     <header class="text-center py-10">
-        <h1 class="text-4xl font-bold text-purple-700 dark:text-purple-300">☕ Kedai Kopi Mantap</h1>
-        <p class="text-gray-500 dark:text-gray-400 mt-2">Temani harimu dengan secangkir kebahagiaan</p>
+        <h1 class="text-4xl font-bold text-purple-700">☕ Kedai Kopi Mantap</h1>
+        <p class="text-gray-500 mt-2">Temani harimu dengan secangkir kebahagiaan</p>
         <button id="darkModeToggle"
-            class="mt-4 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-800 dark:bg-purple-500 dark:hover:bg-purple-700 transition-all">🌙 Dark Mode</button>
+            class="mt-4 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-800 transition-all">🌙 Dark Mode</button>
     </header>
 
     <section class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-6">
         <!-- Card Menu -->
-        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300">
+        <div
+            class="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 dark:bg-gray-800">
             <img src="assets/img/cappucino.jpeg" alt="Cappuccino" class="w-full h-48 object-cover">
             <div class="p-4">
                 <h2 class="text-xl font-bold">Cappuccino</h2>
-                <p class="text-gray-500 dark:text-gray-400 text-sm">Perpaduan espresso, susu, dan foam lembut.</p>
-                <p class="font-semibold mt-2 text-purple-600 dark:text-purple-400">Rp 25.000</p>
+                <p class="text-gray-500 text-sm">Perpaduan espresso, susu, dan foam lembut.</p>
+                <p class="font-semibold mt-2 text-purple-600">Rp 25.000</p>
                 <a href="order.html?coffee=Cappuccino&price=25000"
-                    class="block mt-3 text-center bg-purple-600 dark:bg-purple-500 text-white py-2 rounded-lg hover:bg-purple-800 dark:hover:bg-purple-700 transition-all">Pesan</a>
+                    class="block mt-3 text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all">Pesan</a>
             </div>
         </div>
 
-        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300">
+        <div
+            class="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 dark:bg-gray-800">
             <img src="assets/img/latte.jpeg" alt="Latte" class="w-full h-48 object-cover">
             <div class="p-4">
                 <h2 class="text-xl font-bold">Latte</h2>
-                <p class="text-gray-500 dark:text-gray-400 text-sm">Kopi dengan susu lembut untuk rasa ringan.</p>
-                <p class="font-semibold mt-2 text-purple-600 dark:text-purple-400">Rp 27.000</p>
+                <p class="text-gray-500 text-sm">Kopi dengan susu lembut untuk rasa ringan.</p>
+                <p class="font-semibold mt-2 text-purple-600">Rp 27.000</p>
                 <a href="order.html?coffee=Latte&price=27000"
-                    class="block mt-3 text-center bg-purple-600 dark:bg-purple-500 text-white py-2 rounded-lg hover:bg-purple-800 dark:hover:bg-purple-700 transition-all">Pesan</a>
+                    class="block mt-3 text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all">Pesan</a>
             </div>
         </div>
 
-        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300">
+        <div
+            class="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 dark:bg-gray-800">
             <img src="assets/img/americano.jpeg" alt="Americano" class="w-full h-48 object-cover">
             <div class="p-4">
                 <h2 class="text-xl font-bold">Americano</h2>
-                <p class="text-gray-500 dark:text-gray-400 text-sm">Espresso murni dengan air panas.</p>
-                <p class="font-semibold mt-2 text-purple-600 dark:text-purple-400">Rp 22.000</p>
+                <p class="text-gray-500 text-sm">Espresso murni dengan air panas.</p>
+                <p class="font-semibold mt-2 text-purple-600">Rp 22.000</p>
                 <a href="order.html?coffee=Americano&price=22000"
-                    class="block mt-3 text-center bg-purple-600 dark:bg-purple-500 text-white py-2 rounded-lg hover:bg-purple-800 dark:hover:bg-purple-700 transition-all">Pesan</a>
+                    class="block mt-3 text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all">Pesan</a>
             </div>
         </div>
     </section>
 
     <script>
-        // Script untuk toggle dark mode menggunakan Tailwind
+        // index.js — toggler theme (persist ke localStorage)
         (function () {
-            const tbtn = document.getElementById("darkModeToggle");
-            const html = document.documentElement; // Target <html> untuk class "dark"
+            const tbtn = document.getElementById("darkModeToggle"); // Diubah agar cocok dengan id di HTML
+            const body = document.body;
 
             function applyTheme(theme) {
+                body.setAttribute("data-theme", theme);
+                localStorage.setItem("theme", theme);
+                // Update teks tombol berdasarkan tema
                 if (theme === "dark") {
-                    html.classList.add("dark");
                     tbtn.textContent = "☀️ Light Mode";
                 } else {
-                    html.classList.remove("dark");
                     tbtn.textContent = "🌙 Dark Mode";
                 }
-                localStorage.setItem("theme", theme);
             }
 
             // Terapkan tema yang tersimpan saat halaman dimuat
@@ -86,7 +103,7 @@
             // Event listener untuk toggle
             if (tbtn) {
                 tbtn.addEventListener("click", () => {
-                    const currentTheme = html.classList.contains("dark") ? "dark" : "light";
+                    const currentTheme = body.getAttribute("data-theme");
                     const nextTheme = currentTheme === "light" ? "dark" : "light";
                     applyTheme(nextTheme);
                 });
