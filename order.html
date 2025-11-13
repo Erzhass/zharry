@@ -6,74 +6,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pemesanan Kopi</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Ambil mode dari localStorage (dari index.html)
+        if (localStorage.getItem("theme") === "dark") {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+    </script>
 </head>
 
-<body
-    class="bg-gradient-to-br from-purple-50 to-blue-50 min-h-screen dark:bg-gray-900 dark:text-gray-100 transition-all duration-500">
+<body class="bg-purple-50 dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen transition-all duration-300">
 
-    <div class="max-w-4xl mx-auto py-10 px-6">
-        <h1 class="text-3xl font-bold text-center text-purple-700 dark:text-purple-300 mb-6">☕ Daftar Pesanan Anda</h1>
+    <div class="max-w-3xl mx-auto p-6">
+        <h1 class="text-3xl font-bold mb-6 text-center text-purple-700 dark:text-purple-300">
+            Pesanan Kopi Anda
+        </h1>
 
-        <!-- FORM TAMBAH PESANAN -->
-        <div
-            class="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 rounded-xl shadow-lg p-5 mb-8 transition-all">
-            <form id="orderForm" class="flex flex-wrap items-center justify-center gap-4">
-                <select id="coffeeName" class="p-2 border rounded-md text-gray-800">
-                    <option value="Cappuccino" data-price="25000">Cappuccino - Rp 25.000</option>
-                    <option value="Latte" data-price="27000">Latte - Rp 27.000</option>
-                    <option value="Americano" data-price="22000">Americano - Rp 22.000</option>
-                    <option value="Espresso" data-price="20000">Espresso - Rp 20.000</option>
-                </select>
-                <input type="number" id="quantity" min="1" value="1"
-                    class="p-2 border rounded-md w-20 text-center text-gray-800" />
-                <button type="submit"
-                    class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-800 transition-all">Tambah ke
-                    Pesanan</button>
-                <button type="button" id="resetForm"
-                    class="bg-gray-400 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-all">Reset</button>
+        <!-- Form Pesanan -->
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg mb-6">
+            <form id="orderForm" class="space-y-4">
+                <div>
+                    <label for="coffeeName" class="block mb-2 font-medium">Nama Kopi</label>
+                    <input id="coffeeName" type="text" readonly
+                        class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600" />
+                </div>
+
+                <div>
+                    <label for="qty" class="block mb-2 font-medium">Jumlah</label>
+                    <input id="qty" type="number" min="1" value="1"
+                        class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600" />
+                </div>
+
+                <div class="flex flex-wrap gap-4 justify-center mt-4">
+                    <button type="button" id="addOrder"
+                        class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg shadow-md transition-all">Tambah
+                        ke Pesanan</button>
+                    <button type="reset"
+                        class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg shadow-md transition-all">Reset</button>
+                    <button type="button" id="clearAll"
+                        class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow-md transition-all">Hapus
+                        Semua</button>
+                    <button type="button" id="goConfirm"
+                        class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg shadow-md transition-all">Lanjut
+                        ke Konfirmasi</button>
+                </div>
             </form>
         </div>
 
-        <!-- TABEL PESANAN -->
-        <div class="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 rounded-xl shadow-lg p-6 transition-all">
-            <table class="w-full text-left border-collapse">
-                <thead>
-                    <tr class="bg-purple-100 dark:bg-gray-700">
-                        <th class="p-2">Nama Kopi</th>
-                        <th class="p-2">Jumlah</th>
-                        <th class="p-2">Harga</th>
-                        <th class="p-2">Subtotal</th>
-                        <th class="p-2 text-center">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody id="orderList"></tbody>
-            </table>
-
-            <!-- TOTAL -->
-            <div class="text-right mt-6 text-lg font-semibold">
-                Total Harga: <span id="totalPrice" class="text-purple-700 dark:text-purple-300">Rp 0</span>
+        <!-- Daftar Pesanan -->
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+            <h2 class="text-xl font-semibold mb-4">Daftar Pesanan</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead class="bg-purple-200 dark:bg-gray-700">
+                        <tr>
+                            <th class="p-3">Nama</th>
+                            <th class="p-3">Jumlah</th>
+                            <th class="p-3">Harga</th>
+                            <th class="p-3">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orderList" class="divide-y dark:divide-gray-700"></tbody>
+                </table>
             </div>
-
-            <!-- TOMBOL AKSI -->
-            <div class="flex justify-between mt-8">
-                <button id="clearAll"
-                    class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-all">Hapus
-                    Semua</button>
-                <button id="nextConfirm"
-                    class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-800 transition-all">Lanjut ke
-                    Konfirmasi</button>
+            <div class="mt-4 text-right text-lg font-semibold">
+                Total: <span id="totalPrice" class="text-purple-700 dark:text-purple-300">Rp 0</span>
             </div>
         </div>
 
-        <!-- DARK MODE TOGGLE -->
-        <div class="mt-10 text-center">
-            <button id="toggleDark"
-                class="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-800 transition-all">🌙 Dark
-                Mode</button>
-        </div>
     </div>
 
-    <script src="assets/script/order.js"></script>
+    <script src="order.js"></script>
 </body>
 
 </html>
