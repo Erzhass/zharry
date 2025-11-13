@@ -37,12 +37,14 @@ document.getElementById("confirmOrder").addEventListener("click", () => {
   doc.setFont("helvetica", "normal");
   doc.setTextColor(0, 0, 0);
   doc.text("Jl. Kopi Enak No. 123, Jakarta", 105, 30, { align: "center" });
-  doc.text("Tel: (021) 123-4567 | Email: info@kopimantap.com", 105, 35, { align: "center" });
+  doc.text("Tel: (021) 123-4567 | Email: info@kopimantap.com", 105, 35, {
+    align: "center",
+  });
 
   // Tambahkan tanggal dan waktu
   const now = new Date();
-  const dateStr = now.toLocaleDateString('id-ID');
-  const timeStr = now.toLocaleTimeString('id-ID');
+  const dateStr = now.toLocaleDateString("id-ID");
+  const timeStr = now.toLocaleTimeString("id-ID");
   doc.text(`Tanggal: ${dateStr} | Waktu: ${timeStr}`, 20, 45);
 
   // Garis pemisah header
@@ -90,8 +92,15 @@ document.getElementById("confirmOrder").addEventListener("click", () => {
   doc.setFontSize(10);
   doc.setTextColor(0, 0, 0);
   doc.text("Terima kasih atas kunjungan Anda!", 105, y, { align: "center" });
-  doc.text("Nikmati kopi terbaik di Kedai Kopi Mantap.", 105, y + 10, { align: "center" });
-  doc.text("Kunjungi kami lagi untuk pengalaman yang tak terlupakan.", 105, y + 20, { align: "center" });
+  doc.text("Nikmati kopi terbaik di Kedai Kopi Mantap.", 105, y + 10, {
+    align: "center",
+  });
+  doc.text(
+    "Kunjungi kami lagi untuk pengalaman yang tak terlupakan.",
+    105,
+    y + 20,
+    { align: "center" }
+  );
 
   // Tambahkan elemen mewah: border halaman
   doc.setLineWidth(1);
@@ -100,7 +109,50 @@ document.getElementById("confirmOrder").addEventListener("click", () => {
   // Simpan PDF
   doc.save("struk-pesanan.pdf");
 
-  alert("Pesanan berhasil dikonfirmasi!");
+  // Hapus alert dan ganti dengan popup aesthetic
   localStorage.removeItem("orders");
-  window.location.href = "index.html";
+
+  // Buat elemen overlay popup
+  const popupOverlay = document.createElement("div");
+  popupOverlay.className =
+    "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 transition-opacity duration-300 opacity-0";
+
+  // Buat konten popup
+  const popupBox = document.createElement("div");
+  popupBox.className = `
+  bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl text-center
+  transform scale-95 transition-transform duration-300 w-80
+`;
+
+  // Tambahkan isi popup
+  popupBox.innerHTML = `
+  <h2 class="text-2xl font-bold text-green-600 mb-3">✅ Pesanan Berhasil!</h2>
+  <p class="text-gray-600 dark:text-gray-300 mb-6">
+    Terima kasih telah memesan di <b>Kedai Kopi Mantap</b> ☕<br>
+    Struk pesanan Anda telah diunduh.
+  </p>
+  <button id="goHomeBtn" class="
+    bg-green-600 hover:bg-green-700 text-white font-semibold
+    px-5 py-2 rounded-full transition duration-300
+  ">Kembali ke Beranda</button>
+`;
+
+  // Masukkan popup ke overlay
+  popupOverlay.appendChild(popupBox);
+  document.body.appendChild(popupOverlay);
+
+  // Animasi muncul (fade-in & scale-up)
+  setTimeout(() => {
+    popupOverlay.classList.remove("opacity-0");
+    popupBox.classList.remove("scale-95");
+    popupBox.classList.add("scale-100");
+  }, 50);
+
+  // Tombol kembali ke index.html
+  document.getElementById("goHomeBtn").addEventListener("click", () => {
+    popupOverlay.classList.add("opacity-0");
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 300);
+  });
 });
