@@ -1,50 +1,74 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Mewah</title>
-    <link rel="stylesheet" href="style/style.css">
-</head>
-<body>
-    <div class="particles" id="particles"></div>
-    <div class="login-container">
-        <h2>Web Ferzha</h2>
-        <form>
-            <div class="input-group">
-                <input type="text" placeholder="Username" required>
-            </div>
-            <div class="input-group">
-                <input type="password" placeholder="Password" required>
-            </div>
-            <button type="submit">Masuk</button>
-        </form>
-        <a href="#" class="forgot-password">Lupa Password?</a>
+<!doctype html>
+<span class="font-bold">Rp 18.000</span>
+<a href="order.html?coffee=Cappuccino" class="inline-block px-4 py-2 bg-violet-600 text-white rounded-lg">Pesan
+    Sekarang</a>
+</div>
+</article>
+
+
+<article class="p-5 bg-white rounded-2xl shadow-md">
+    <h3 class="text-xl font-semibold">Latte</h3>
+    <p class="mt-2 text-slate-500">Lebih banyak susu, lembut dan creamy.</p>
+    <div class="mt-4 flex items-center justify-between">
+        <span class="font-bold">Rp 20.000</span>
+        <a href="order.html?coffee=Latte" class="inline-block px-4 py-2 bg-violet-600 text-white rounded-lg">Pesan
+            Sekarang</a>
     </div>
+</article>
 
-    <script>
-        // Animasi partikel latar belakang
-        const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 50; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.width = Math.random() * 10 + 5 + 'px';
-            particle.style.height = particle.style.width;
-            particle.style.animationDelay = Math.random() * 6 + 's';
-            particlesContainer.appendChild(particle);
-        }
 
-        // Animasi tombol saat diklik
-        const button = document.querySelector('button');
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            button.innerHTML = 'Memproses...';
-            setTimeout(() => {
-                button.innerHTML = 'Masuk';
-                alert('Login berhasil! (Ini simulasi)');
-            }, 2000);
-        });
-    </script>
+<article class="p-5 bg-white rounded-2xl shadow-md">
+    <h3 class="text-xl font-semibold">Americano</h3>
+    <p class="mt-2 text-slate-500">Espresso ditambah air panas.</p>
+    <div class="mt-4 flex items-center justify-between">
+        <span class="font-bold">Rp 15.000</span>
+        <a href="order.html?coffee=Americano" class="inline-block px-4 py-2 bg-violet-600 text-white rounded-lg">Pesan
+            Sekarang</a>
+    </div>
+</article>
+
+
+<!-- tambahkan item lain sesuai kebutuhan -->
+<article class="p-5 bg-white rounded-2xl shadow-md">
+    <h3 class="text-xl font-semibold">Mocha</h3>
+    <p class="mt-2 text-slate-500">Perpaduan cokelat dan espresso.</p>
+    <div class="mt-4 flex items-center justify-between">
+        <span class="font-bold">Rp 22.000</span>
+        <a href="order.html?coffee=Mocha" class="inline-block px-4 py-2 bg-violet-600 text-white rounded-lg">Pesan
+            Sekarang</a>
+    </div>
+</article>
+
+
+<article class="p-5 bg-white rounded-2xl shadow-md">
+    <h3 class="text-xl font-semibold">Espresso</h3>
+    <p class="mt-2 text-slate-500">Kopi pekat, penuh karakter.</p>
+    <div class="mt-4 flex items-center justify-between">
+        <span class="font-bold">Rp 12.000</span>
+        <a href="order.html?coffee=Espresso" class="inline-block px-4 py-2 bg-violet-600 text-white rounded-lg">Pesan
+            Sekarang</a>
+    </div>
+</article>
+
+
+<article class="p-5 bg-white rounded-2xl shadow-md">
+    <h3 class="text-xl font-semibold">Flat White</h3>
+    <p class="mt-2 text-slate-500">Tekstur susu halus dengan espresso.</p>
+    <div class="mt-4 flex items-center justify-between">
+        <span class="font-bold">Rp 19.000</span>
+        <a href="order.html?coffee=Flat%20White"
+            class="inline-block px-4 py-2 bg-violet-600 text-white rounded-lg">Pesan Sekarang</a>
+    </div>
+</article>
+
+
+</section>
+</main>
+
+
+<footer class="border-t mt-12 py-6">
+    <div class="max-w-5xl mx-auto text-center text-sm text-slate-500">© 2025 KopiGero — Selamat ngopi!</div>
+</footer>
 </body>
+
 </html>
