@@ -6,6 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kedai Kopi Mantap</title>
     <script src="https://cdn.tailwindcss.com"></script>
+      <style>
+        /* Custom CSS untuk dark mode berdasarkan data-theme */
+        [data-theme="dark"] {
+            background: linear-gradient(to bottom right, #1a1a2e, #16213e);
+            color: #e2e8f0;
+        }
+        [data-theme="dark"] .card-bg {
+            background-color: #2d3748;
+        }
+        [data-theme="dark"] .text-light {
+            color: #a0aec0;
+        }
+        [data-theme="dark"] .text-accent {
+            color: #9f7aea;
+        }
+        [data-theme="dark"] .btn-primary {
+            background-color: #4a5568;
+        }
+        [data-theme="dark"] .btn-primary:hover {
+            background-color: #2d3748;
+        }
+    </style>
 </head>
 
 <body
@@ -58,30 +80,25 @@
     </section>
 
     <script>
-        const toggle = document.getElementById('darkModeToggle');
-        
-        // Fungsi untuk update teks tombol berdasarkan mode
-        function updateToggleText() {
-            if (document.body.classList.contains('dark')) {
-                toggle.textContent = '☀️ Light Mode';
-            } else {
-                toggle.textContent = '🌙 Dark Mode';
-            }
-        }
-        
-        // Cek status dari localStorage saat halaman dimuat
-        const isDark = localStorage.getItem('darkMode') === 'true';
-        if (isDark) {
-            document.body.classList.add('dark');
-        }
-        updateToggleText();  // Update teks tombol saat load
-        
-        // Event listener untuk toggle
-        toggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark');
-            localStorage.setItem('darkMode', document.body.classList.contains('dark'));
-            updateToggleText();  // Update teks setelah toggle
-        });
+          // index.js — toggler theme (persist ke localStorage)
+        (function () {
+          const tbtn = document.getElementById("toggleTheme");
+          const root = document.documentElement;
+          const body = document.body;
+          function applyTheme(theme) {
+            body.setAttribute("data-theme", theme);
+            localStorage.setItem("theme", theme);
+          }
+          const saved = localStorage.getItem("theme") || "light";
+          applyTheme(saved);
+          if (tbtn) {
+            tbtn.addEventListener("click", () => {
+              const next =
+                body.getAttribute("data-theme") === "light" ? "dark" : "light";
+              applyTheme(next);
+            });
+          }
+        })();
     </script>
 </body>
 
