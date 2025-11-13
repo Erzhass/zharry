@@ -1,27 +1,32 @@
-// Ambil elemen penting
+// Elemen
 const coffeeName = document.getElementById("coffeeName");
-const qty = document.getElementById("qty");
-const addOrder = document.getElementById("addOrder");
+const quantity = document.getElementById("quantity");
+const orderForm = document.getElementById("orderForm");
 const clearAll = document.getElementById("clearAll");
-const goConfirm = document.getElementById("goConfirm");
+const nextConfirm = document.getElementById("nextConfirm");
 const orderList = document.getElementById("orderList");
 const totalPrice = document.getElementById("totalPrice");
 
-// Ambil nama kopi dari URL (misal: ?coffee=Americano)
-const params = new URLSearchParams(window.location.search);
-const coffee = params.get("coffee");
-if (coffee) coffeeName.value = coffee;
+// Modal Popup
+const popup = document.getElementById("popup");
+const popupMessage = document.getElementById("popupMessage");
+const popupClose = document.getElementById("popupClose");
 
-// Daftar harga kopi (bisa kamu ganti sesuai menu)
+function showPopup(message) {
+  popupMessage.textContent = message;
+  popup.classList.remove("hidden");
+}
+popupClose.addEventListener("click", () => popup.classList.add("hidden"));
+
+// Harga kopi
 const prices = {
-  Americano: 15000,
-  Cappuccino: 20000,
-  Latte: 18000,
-  Mocha: 22000,
-  Espresso: 17000,
+  Americano: 22000,
+  Cappuccino: 25000,
+  Latte: 27000,
+  Espresso: 20000,
 };
 
-// Ambil data dari localStorage
+// Data pesanan
 let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
 // Render tabel pesanan
@@ -29,15 +34,11 @@ function renderOrders() {
   orderList.innerHTML = "";
   let total = 0;
 
-  orders.forEach((item, index) => {
+  orders.forEach((item) => {
     const subtotal = item.qty * item.price;
     total += subtotal;
-
-    // Tambahkan animasi fade in
     const row = document.createElement("tr");
-    row.className =
-      "transition-all duration-300 hover:bg-purple-100 dark:hover:bg-gray-700";
-    row.style.opacity = 0;
+    row.className = "hover:bg-purple-100 dark:hover:bg-gray-700 transition-all";
     row.innerHTML = `
       <td class="p-3">${item.name}</td>
       <td class="p-3">${item.qty}</td>
@@ -45,47 +46,49 @@ function renderOrders() {
       <td class="p-3">Rp ${subtotal.toLocaleString()}</td>
     `;
     orderList.appendChild(row);
-
-    // Animasi muncul
-    setTimeout(() => {
-      row.style.opacity = 1;
-    }, 100);
   });
 
   totalPrice.textContent = `Rp ${total.toLocaleString()}`;
   localStorage.setItem("orders", JSON.stringify(orders));
 }
 
-// Tambah ke pesanan
-addOrder.addEventListener("click", () => {
+// Tambah pesanan
+orderForm.addEventListener("submit", (e) => {
+  e.preventDefault();
   const name = coffeeName.value.trim();
-  const jumlah = parseInt(qty.value);
-  if (!name || jumlah < 1) return alert("Masukkan data pesanan dengan benar!");
+  const qty = parseInt(quantity.value);
+
+  if (!name || qty < 1) return showPopup("Masukkan data pesanan dengan benar!");
 
   const price = prices[name] || 0;
-
-  // Jika kopi sudah ada, update jumlah
   const existing = orders.find((o) => o.name === name);
-  if (existing) {
-    existing.qty += jumlah;
-  } else {
-    orders.push({ name, qty: jumlah, price });
-  }
+
+  if (existing) existing.qty += qty;
+  else orders.push({ name, qty, price });
 
   renderOrders();
+  showPopup("Pesanan berhasil ditambahkan!");
 });
 
-// Hapus semua pesanan
+// Reset form
+document.getElementById("resetForm").addEventListener("click", () => {
+  orderForm.reset();
+  showPopup("Form telah direset!");
+});
+
+// Hapus semua
 clearAll.addEventListener("click", () => {
+  if (orders.length === 0) return showPopup("Belum ada pesanan untuk dihapus!");
   orders = [];
   renderOrders();
+  showPopup("Semua pesanan telah dihapus!");
 });
 
 // Lanjut ke konfirmasi
-goConfirm.addEventListener("click", () => {
-  if (orders.length === 0) return alert("Belum ada pesanan!");
+nextConfirm.addEventListener("click", () => {
+  if (orders.length === 0) return showPopup("Belum ada pesanan!");
   window.location.href = "confirm.html";
 });
 
-// Jalankan saat halaman dimuat
+// Tampilkan pesanan saat load
 renderOrders();
