@@ -1,105 +1,95 @@
-// Fungsi untuk mendapatkan keranjang dari localStorage
-function getCart() {
-    return JSON.parse(localStorage.getItem('cart')) || [];
-}
+// Fungsi untuk toggle dark mode
+const toggleDarkMode = () => {
+  const body = document.body;
+  const isDark = body.classList.contains('dark');
+  if (isDark) {
+    body.classList.remove('dark');
+    localStorage.setItem('theme', 'light');
+  } else {
+    body.classList.add('dark');
+    localStorage.setItem('theme', 'dark');
+  }
+};
 
-// Fungsi untuk menyimpan keranjang ke localStorage
-function saveCart(cart) {
-    localStorage.setItem('cart', JSON.stringify(cart));
-}
+// Fungsi untuk set theme berdasarkan localStorage
+const setTheme = () => {
+  const theme = localStorage.getItem('theme');
+  if (theme === 'dark') {
+    document.body.classList.add('dark');
+  } else {
+    document.body.classList.remove('dark');
+  }
+};
 
-// Fungsi untuk update tampilan keranjang
-function updateCartDisplay() {
-    const cart = getCart();
-    const cartItems = document.getElementById('cartItems');
-    const cartTotal = document.getElementById('cartTotal');
-    const cartCount = document.getElementById('cartCount');
-    
-    cartItems.innerHTML = '';
-    let total = 0;
-    let count = 0;
-    
-    cart.forEach((item, index) => {
-        const subtotal = item.price * item.quantity;
-        total += subtotal;
-        count += item.quantity;
-        
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'flex justify-between items-center border-b pb-2';
-        itemDiv.innerHTML = `
-            <div>
-                <p class="font-semibold">${item.name}</p>
-                <p class="text-sm text-gray-500">Rp ${item.price.toLocaleString()} x ${item.quantity}</p>
-            </div>
-            <div>
-                <p class="font-semibold">Rp ${subtotal.toLocaleString()}</p>
-                <button class="text-red-500 hover:text-red-700" onclick="removeFromCart(${index})">Hapus</button>
-            </div>
-        `;
-        cartItems.appendChild(itemDiv);
-    });
-    
-    cartTotal.textContent = `Rp ${total.toLocaleString()}`;
-    cartCount.textContent = count;
-}
+// Variabel global untuk orders (dari localStorage)
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
-// Fungsi untuk menambah item ke keranjang
+// Fungsi tambah ke keranjang
 function addToCart(name, price) {
-    const cart = getCart();
-    const existingItem = cart.find(item => item.name === name);
-    
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        cart.push({ name, price: parseInt(price), quantity: 1 });
-    }
-    
-    saveCart(cart);
-    updateCartDisplay();
+  const existing = orders.find(item => item.name === name);
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    orders.push({ name, qty: 1, price });
+  }
+  localStorage.setItem("orders", JSON.stringify(orders));
+  renderCart();
+  // Animasi feedback
+  document.body.classList.add("bg-green-50");
+  setTimeout(() => document.body.classList.remove("bg-green-50"), 400);
 }
 
-// Fungsi untuk menghapus item dari keranjang
+// Render keranjang
+function renderCart() {
+  const cartEl = document.getElementById("cart");
+  const cartItemsEl = document.getElementById("cartItems");
+  const cartTotalEl = document.getElementById("cartTotal");
+  cartItemsEl.innerHTML = "";
+  let total = 0;
+
+  if (orders.length === 0) {
+    cartEl.classList.add("hidden");
+    return;
+  }
+
+  cartEl.classList.remove("hidden");
+  orders.forEach((item, index) => {
+    const subtotal = item.qty * item.price;
+    total += subtotal;
+    cartItemsEl.innerHTML += `
+      <div class="flex justify-between items-center py-1 border-b border-gray-200 dark:border-gray-700">
+        <span>${item.name} (x${item.qty})</span>
+        <span>Rp ${subtotal.toLocaleString()}</span>
+        <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700">✕</button>
+      </div>
+    `;
+  });
+  cartTotalEl.textContent = `Rp ${total.toLocaleString()}`;
+}
+
+// Hapus item dari keranjang
 function removeFromCart(index) {
-    const cart = getCart();
-    cart.splice(index, 1);
-    saveCart(cart);
-    updateCartDisplay();
+  orders.splice(index, 1);
+  localStorage.setItem("orders", JSON.stringify(orders));
+  renderCart();
 }
 
-// Event listeners
+// Checkout ke order.html
+function checkout() {
+  if (orders.length === 0) {
+    alert("Keranjang kosong!");
+    return;
+  }
+  window.location.href = "order.html";
+}
+
+// Event listener saat DOM loaded
 document.addEventListener('DOMContentLoaded', () => {
-    updateCartDisplay();
-    
-    // Tombol tambah ke keranjang
-    document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.addEventListener('click', () => {
-            const name = button.getAttribute('data-coffee');
-            const price = button.getAttribute('data-price');
-            addToCart(name, price);
-        });
-    });
-    
-    // Toggle keranjang
-    const toggleCart = document.getElementById('toggleCart');
-    const cartSidebar = document.getElementById('cartSidebar');
-    const closeCart = document.getElementById('closeCart');
-    
-    toggleCart.addEventListener('click', () => {
-        cartSidebar.classList.toggle('translate-x-full');
-    });
-    
-    closeCart.addEventListener('click', () => {
-        cartSidebar.classList.add('translate-x-full');
-    });
-    
-    // Hapus semua
-    document.getElementById('clearCart').addEventListener('click', () => {
-        saveCart([]);
-        updateCartDisplay();
-    });
-    
-    // Lanjut ke pemesanan
-    document.getElementById('proceedToOrder').addEventListener('click', () => {
-        window.location.href = 'order.html';
-    });
+  setTheme();
+  renderCart();  // Render keranjang saat halaman dimuat
+  // Jika ada tombol toggle dark mode, tambahkan di sini
+  // const toggleButton = document.getElementById('toggleDarkMode');
+  // if (toggleButton) {
+  //   toggleButton.addEventListener('click', toggleDarkMode);
+  // }
 });

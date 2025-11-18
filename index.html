@@ -1,5 +1,3 @@
-"index.php"  <!-- (Anda menyebutnya index.php, tapi ini HTML; saya asumsikan ini index.html) -->
-
 <!DOCTYPE html>
 <html lang="id">
 
@@ -12,32 +10,11 @@
 </head>
 
 <body class="bg-gradient-to-br from-purple-50 to-blue-50 text-gray-800 transition-all duration-500">
-    <!-- Header dengan Keranjang -->
-    <header class="text-center py-10 relative">
+    <!-- Note: Saya menghapus class dark:bg-gray-900 dari body karena kita menggunakan data-theme untuk kontrol manual -->
+    <header class="text-center py-10">
         <h1 class="text-4xl font-bold text-purple-700 dark:text-purple-300">☕ Kedai Kopi Mantap</h1>
         <p class="text-gray-500 mt-2 dark:text-gray-400">Temani harimu dengan secangkir kebahagiaan</p>
-        <!-- Ikon Keranjang -->
-        <div id="cartIcon" class="absolute top-4 right-4 cursor-pointer bg-purple-600 text-white p-2 rounded-full hover:bg-purple-800 transition-all">
-            🛒 <span id="cartBadge" class="bg-red-500 text-white text-xs px-2 py-1 rounded-full ml-1">0</span>
-        </div>
     </header>
-
-    <!-- Modal Keranjang -->
-    <div id="cartModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 max-w-md w-full mx-4">
-            <h2 class="text-xl font-bold mb-4 text-purple-700 dark:text-purple-300">Keranjang Anda</h2>
-            <div id="cartItems" class="space-y-2 max-h-64 overflow-y-auto">
-                <!-- Items akan ditampilkan di sini -->
-            </div>
-            <div class="mt-4 text-right font-semibold">
-                Total: <span id="cartTotal" class="text-purple-700 dark:text-purple-300">Rp 0</span>
-            </div>
-            <div class="flex justify-between mt-4">
-                <button id="closeCart" class="bg-gray-400 text-white px-4 py-2 rounded-md hover:bg-gray-600">Tutup</button>
-                <a href="order.html" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-800">Lanjut ke Pesan</a>
-            </div>
-        </div>
-    </div>
 
     <section class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-6">
         <!-- Card Menu -->
@@ -47,7 +24,7 @@
                 <h2 class="text-xl font-bold dark:text-white">Cappuccino</h2>
                 <p class="text-gray-500 text-sm dark:text-gray-400">Perpaduan espresso, susu, dan foam lembut.</p>
                 <p class="font-semibold mt-2 text-purple-600 dark:text-purple-300">Rp 25.000</p>
-                <button data-coffee="Cappuccino" data-price="25000" class="addToCart block mt-3 text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">Tambah ke Keranjang</button>
+                <button onclick="addToCart('Cappuccino', 25000)" class="block mt-3 w-full text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">Tambah ke Keranjang</button>
             </div>
         </div>
 
@@ -57,7 +34,7 @@
                 <h2 class="text-xl font-bold dark:text-white">Latte</h2>
                 <p class="text-gray-500 text-sm dark:text-gray-400">Kopi dengan susu lembut untuk rasa ringan.</p>
                 <p class="font-semibold mt-2 text-purple-600 dark:text-purple-300">Rp 27.000</p>
-                <button data-coffee="Latte" data-price="27000" class="addToCart block mt-3 text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">Tambah ke Keranjang</button>
+                <button onclick="addToCart('Latte', 27000)" class="block mt-3 w-full text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">Tambah ke Keranjang</button>
             </div>
         </div>
 
@@ -67,12 +44,92 @@
                 <h2 class="text-xl font-bold dark:text-white">Americano</h2>
                 <p class="text-gray-500 text-sm dark:text-gray-400">Espresso murni dengan air panas.</p>
                 <p class="font-semibold mt-2 text-purple-600 dark:text-purple-300">Rp 22.000</p>
-                <button data-coffee="Americano" data-price="22000" class="addToCart block mt-3 text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">Tambah ke Keranjang</button>
+                <button onclick="addToCart('Americano', 22000)" class="block mt-3 w-full text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">Tambah ke Keranjang</button>
             </div>
         </div>
     </section>
 
+    <!-- Keranjang (Floating Cart) -->
+    <div id="cart" class="fixed bottom-4 right-4 bg-white dark:bg-gray-800 shadow-lg rounded-xl p-4 w-80 hidden transition-all duration-300">
+        <h3 class="text-lg font-bold text-purple-700 dark:text-purple-300 mb-2">🛒 Keranjang</h3>
+        <div id="cartItems" class="max-h-40 overflow-y-auto mb-4">
+            <!-- Item akan dirender di sini -->
+        </div>
+        <div class="flex justify-between items-center">
+            <span class="font-semibold">Total: <span id="cartTotal" class="text-purple-600 dark:text-purple-300">Rp 0</span></span>
+            <button onclick="checkout()" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-800 transition-all">Checkout</button>
+        </div>
+    </div>
+
     <script src="assets/script/index.js"></script>
+    <script>
+        // Ambil data dari localStorage
+        let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+        // Fungsi tambah ke keranjang
+        function addToCart(name, price) {
+            const existing = orders.find(item => item.name === name);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                orders.push({ name, qty: 1, price });
+            }
+            localStorage.setItem("orders", JSON.stringify(orders));
+            renderCart();
+            // Animasi feedback
+            document.body.classList.add("bg-green-50");
+            setTimeout(() => document.body.classList.remove("bg-green-50"), 400);
+        }
+
+        // Render keranjang
+        function renderCart() {
+            const cartEl = document.getElementById("cart");
+            const cartItemsEl = document.getElementById("cartItems");
+            const cartTotalEl = document.getElementById("cartTotal");
+            cartItemsEl.innerHTML = "";
+            let total = 0;
+            let totalQty = 0;
+
+            if (orders.length === 0) {
+                cartEl.classList.add("hidden");
+                return;
+            }
+
+            cartEl.classList.remove("hidden");
+            orders.forEach((item, index) => {
+                const subtotal = item.qty * item.price;
+                total += subtotal;
+                totalQty += item.qty;
+                cartItemsEl.innerHTML += `
+                    <div class="flex justify-between items-center py-1 border-b border-gray-200 dark:border-gray-700">
+                        <span>${item.name} (x${item.qty})</span>
+                        <span>Rp ${subtotal.toLocaleString()}</span>
+                        <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700">✕</button>
+                    </div>
+                `;
+            });
+            cartTotalEl.textContent = `Rp ${total.toLocaleString()}`;
+        }
+
+        // Hapus item dari keranjang
+        function removeFromCart(index) {
+            orders.splice(index, 1);
+            localStorage.setItem("orders", JSON.stringify(orders));
+            renderCart();
+        }
+
+        // Checkout ke order.html
+        function checkout() {
+            if (orders.length === 0) {
+                alert("Keranjang kosong!");
+                return;
+            }
+            window.location.href = "order.html";
+        }
+
+        // Render saat load
+        renderCart();
+    </script>
 </body>
 
 </html>
