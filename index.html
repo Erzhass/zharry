@@ -16,48 +16,63 @@
         <p class="text-gray-500 mt-2 dark:text-gray-400">Temani harimu dengan secangkir kebahagiaan</p>
     </header>
 
-    <section class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-6">
-        <!-- Card Menu -->
-        <div class="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 dark:bg-gray-800">
-            <img src="assets/img/cappucino.jpeg" alt="Cappuccino" class="w-full h-48 object-cover">
-            <div class="p-4">
-                <h2 class="text-xl font-bold dark:text-white">Cappuccino</h2>
-                <p class="text-gray-500 text-sm dark:text-gray-400">Perpaduan espresso, susu, dan foam lembut.</p>
-                <p class="font-semibold mt-2 text-purple-600 dark:text-purple-300">Rp 25.000</p>
-                <button onclick="addToCart('Cappuccino', 25000)" class="block mt-3 w-full text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">Tambah ke Keranjang</button>
+    <!-- Container untuk menu dan keranjang -->
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row gap-8">
+        <!-- Section Menu -->
+        <section class="flex-1 grid grid-cols-2 gap-8">
+            <!-- Card Menu -->
+            <div class="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 dark:bg-gray-800">
+                <img src="assets/img/cappucino.jpeg" alt="Cappuccino" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h2 class="text-xl font-bold dark:text-white">Cappuccino</h2>
+                    <p class="text-gray-500 text-sm dark:text-gray-400">Perpaduan espresso, susu, dan foam lembut.</p>
+                    <p class="font-semibold mt-2 text-purple-600 dark:text-purple-300">Rp 25.000</p>
+                    <button onclick="addToCart('Cappuccino', 25000)" class="block mt-3 w-full text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">Tambah ke Keranjang</button>
+                </div>
             </div>
-        </div>
 
-        <div class="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 dark:bg-gray-800">
-            <img src="assets/img/latte.jpeg" alt="Latte" class="w-full h-48 object-cover">
-            <div class="p-4">
-                <h2 class="text-xl font-bold dark:text-white">Latte</h2>
-                <p class="text-gray-500 text-sm dark:text-gray-400">Kopi dengan susu lembut untuk rasa ringan.</p>
-                <p class="font-semibold mt-2 text-purple-600 dark:text-purple-300">Rp 27.000</p>
-                <button onclick="addToCart('Latte', 27000)" class="block mt-3 w-full text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">Tambah ke Keranjang</button>
+            <div class="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 dark:bg-gray-800">
+                <img src="assets/img/latte.jpeg" alt="Latte" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h2 class="text-xl font-bold dark:text-white">Latte</h2>
+                    <p class="text-gray-500 text-sm dark:text-gray-400">Kopi dengan susu lembut untuk rasa ringan.</p>
+                    <p class="font-semibold mt-2 text-purple-600 dark:text-purple-300">Rp 27.000</p>
+                    <button onclick="addToCart('Latte', 27000)" class="block mt-3 w-full text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">Tambah ke Keranjang</button>
+                </div>
             </div>
-        </div>
 
-        <div class="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 dark:bg-gray-800">
-            <img src="assets/img/americano.jpeg" alt="Americano" class="w-full h-48 object-cover">
-            <div class="p-4">
-                <h2 class="text-xl font-bold dark:text-white">Americano</h2>
-                <p class="text-gray-500 text-sm dark:text-gray-400">Espresso murni dengan air panas.</p>
-                <p class="font-semibold mt-2 text-purple-600 dark:text-purple-300">Rp 22.000</p>
-                <button onclick="addToCart('Americano', 22000)" class="block mt-3 w-full text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">Tambah ke Keranjang</button>
+            <div class="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 dark:bg-gray-800">
+                <img src="assets/img/americano.jpeg" alt="Americano" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h2 class="text-xl font-bold dark:text-white">Americano</h2>
+                    <p class="text-gray-500 text-sm dark:text-gray-400">Espresso murni dengan air panas.</p>
+                    <p class="font-semibold mt-2 text-purple-600 dark:text-purple-300">Rp 22.000</p>
+                    <button onclick="addToCart('Americano', 22000)" class="block mt-3 w-full text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">Tambah ke Keranjang</button>
+                </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Keranjang (Floating Cart) -->
-    <div id="cart" class="fixed bottom-4 right-4 bg-white dark:bg-gray-800 shadow-lg rounded-xl p-4 w-80 hidden transition-all duration-300">
-        <h3 class="text-lg font-bold text-purple-700 dark:text-purple-300 mb-2">🛒 Keranjang</h3>
-        <div id="cartItems" class="max-h-40 overflow-y-auto mb-4">
-            <!-- Item akan dirender di sini -->
-        </div>
-        <div class="flex justify-between items-center">
-            <span class="font-semibold">Total: <span id="cartTotal" class="text-purple-600 dark:text-purple-300">Rp 0</span></span>
-            <button onclick="checkout()" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-800 transition-all">Checkout</button>
+            <!-- Card Espresso -->
+            <div class="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 dark:bg-gray-800">
+                <img src="assets/img/espresso.jpeg" alt="Espresso" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h2 class="text-xl font-bold dark:text-white">Espresso</h2>
+                    <p class="text-gray-500 text-sm dark:text-gray-400">Espresso klasik dengan rasa kuat.</p>
+                    <p class="font-semibold mt-2 text-purple-600 dark:text-purple-300">Rp 20.000</p>
+                    <button onclick="addToCart('Espresso', 20000)" class="block mt-3 w-full text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">Tambah ke Keranjang</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Keranjang (di kanan) -->
+        <div id="cart" class="w-64 bg-white dark:bg-gray-800 shadow-lg rounded-xl p-4 hidden transition-all duration-300">
+            <h3 class="text-lg font-bold text-purple-700 dark:text-purple-300 mb-2">🛒 Keranjang</h3>
+            <div id="cartItems" class="max-h-40 overflow-y-auto mb-4">
+                <!-- Item akan dirender di sini -->
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="font-semibold">Total: <span id="cartTotal" class="text-purple-600 dark:text-purple-300">Rp 0</span></span>
+                <button onclick="checkout()" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-800 transition-all">Checkout</button>
+            </div>
         </div>
     </div>
 
