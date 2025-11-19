@@ -17,7 +17,7 @@
     </header>
 
     <section class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-6">
-        <!-- Card Menu -->
+        <!-- Card Menu Kopi yang sudah ada -->
         <div class="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 dark:bg-gray-800">
             <img src="assets/img/cappucino.jpeg" alt="Cappuccino" class="w-full h-48 object-cover">
             <div class="p-4">
@@ -48,18 +48,37 @@
             </div>
         </div>
 
-        
-            <!-- Card Espresso -->
-            <div class="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 dark:bg-gray-800">
-                <img src="assets/img/coffe expreso.jpeg" alt="Espresso" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h2 class="text-xl font-bold dark:text-white">Espresso</h2>
-                    <p class="text-gray-500 text-sm dark:text-gray-400">Espresso klasik dengan rasa kuat.</p>
-                    <p class="font-semibold mt-2 text-purple-600 dark:text-purple-300">Rp 20.000</p>
-                    <button onclick="addToCart('Espresso', 20000)" class="block mt-3 w-full text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">Tambah ke Keranjang</button>
-                </div>
+        <div class="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 dark:bg-gray-800">
+            <img src="assets/img/coffe expreso.jpeg" alt="Espresso" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h2 class="text-xl font-bold dark:text-white">Espresso</h2>
+                <p class="text-gray-500 text-sm dark:text-gray-400">Espresso klasik dengan rasa kuat.</p>
+                <p class="font-semibold mt-2 text-purple-600 dark:text-purple-300">Rp 20.000</p>
+                <button onclick="addToCart('Espresso', 20000)" class="block mt-3 w-full text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">Tambah ke Keranjang</button>
             </div>
+        </div>
 
+        <!-- Card Menu Baru: Air Mineral -->
+        <div class="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 dark:bg-gray-800">
+            <img src="assets/img/air-mineral.jpeg" alt="Air Mineral" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h2 class="text-xl font-bold dark:text-white">Air Mineral</h2>
+                <p class="text-gray-500 text-sm dark:text-gray-400">Air mineral segar untuk penyegar dahaga.</p>
+                <p class="font-semibold mt-2 text-purple-600 dark:text-purple-300">Rp 5.000</p>
+                <button onclick="addToCart('Air Mineral', 5000)" class="block mt-3 w-full text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">Tambah ke Keranjang</button>
+            </div>
+        </div>
+
+        <!-- Card Menu Baru: Teh Hangat -->
+        <div class="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 dark:bg-gray-800">
+            <img src="assets/img/teh-hangat.jpeg" alt="Teh Hangat" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h2 class="text-xl font-bold dark:text-white">Teh Dingin/Hangat</h2>
+                <p class="text-gray-500 text-sm dark:text-gray-400">Teh yang menenangkan dan nikmat.</p>
+                <p class="font-semibold mt-2 text-purple-600 dark:text-purple-300">Rp 10.000</p>
+                <button onclick="addToCart('Teh Hangat', 10000)" class="block mt-3 w-full text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">Tambah ke Keranjang</button>
+            </div>
+        </div>
     </section>
 
     <!-- Keranjang (Floating Cart) -->
