@@ -69,14 +69,17 @@
             </div>
         </div>
 
-        <!-- Card Menu Baru: Teh Hangat -->
+        <!-- Card Menu Baru: Teh (Gabungan Hangat/Dingin) -->
         <div class="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 dark:bg-gray-800">
-            <img src="assets/img/teh-hangat.jpeg" alt="Teh Hangat" class="w-full h-48 object-cover">
+            <img src="assets/img/teh.jpeg" alt="Teh" class="w-full h-48 object-cover"> <!-- Gunakan gambar umum untuk teh -->
             <div class="p-4">
-                <h2 class="text-xl font-bold dark:text-white">Teh Dingin/Hangat</h2>
-                <p class="text-gray-500 text-sm dark:text-gray-400">Teh yang menenangkan dan nikmat.</p>
-                <p class="font-semibold mt-2 text-purple-600 dark:text-purple-300">Rp 10.000</p>
-                <button onclick="addToCart('Teh Hangat', 10000)" class="block mt-3 w-full text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">Tambah ke Keranjang</button>
+                <h2 class="text-xl font-bold dark:text-white">Teh</h2>
+                <p class="text-gray-500 text-sm dark:text-gray-400">Teh hangat atau dingin yang menyegarkan.</p>
+                <select id="teaType" class="mt-2 p-2 border rounded-md w-full text-gray-800 dark:text-gray-100 bg-transparent">
+                    <option value="Hangat" data-price="10000">Hangat - Rp 10.000</option>
+                    <option value="Dingin" data-price="12000">Dingin - Rp 12.000</option>
+                </select>
+                <button onclick="addTeaToCart()" class="block mt-3 w-full text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-800 transition-all dark:bg-purple-500 dark:hover:bg-purple-700">Tambah ke Keranjang</button>
             </div>
         </div>
     </section>
@@ -100,6 +103,26 @@
 
         // Fungsi tambah ke keranjang
         function addToCart(name, price) {
+            const existing = orders.find(item => item.name === name);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                orders.push({ name, qty: 1, price });
+            }
+            localStorage.setItem("orders", JSON.stringify(orders));
+            renderCart();
+            // Animasi feedback
+            document.body.classList.add("bg-green-50");
+            setTimeout(() => document.body.classList.remove("bg-green-50"), 400);
+        }
+
+        // Fungsi khusus untuk Teh (dengan pilihan hangat/dingin)
+        function addTeaToCart() {
+            const teaSelect = document.getElementById("teaType");
+            const teaType = teaSelect.value;
+            const price = parseInt(teaSelect.selectedOptions[0].dataset.price);
+            const name = `Teh ${teaType}`; // Nama akan jadi "Teh Hangat" atau "Teh Dingin"
+
             const existing = orders.find(item => item.name === name);
             if (existing) {
                 existing.qty += 1;
