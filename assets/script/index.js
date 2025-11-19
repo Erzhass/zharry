@@ -83,6 +83,39 @@ function checkout() {
   window.location.href = "order.html";
 }
 
+// Fungsi khusus untuk Teh (dengan pilihan hangat/dingin)
+function addTeaToCart() {
+    const teaSelect = document.getElementById("teaType");
+    if (!teaSelect) {
+        console.error("Element dengan ID 'teaType' tidak ditemukan.");
+        return;
+    }
+    const teaType = teaSelect.value;
+    const selectedOption = teaSelect.selectedOptions[0];
+    if (!selectedOption) {
+        console.error("Tidak ada opsi yang dipilih di select Teh.");
+        return;
+    }
+    const price = parseInt(selectedOption.dataset.price);
+    if (isNaN(price)) {
+        console.error("Harga tidak valid untuk Teh.");
+        return;
+    }
+    const name = `Teh ${teaType}`; // Nama akan jadi "Teh Hangat" atau "Teh Dingin"
+
+    const existing = orders.find(item => item.name === name);
+    if (existing) {
+        existing.qty += 1;
+    } else {
+        orders.push({ name, qty: 1, price });
+    }
+    localStorage.setItem("orders", JSON.stringify(orders));
+    renderCart();
+    // Animasi feedback
+    document.body.classList.add("bg-green-50");
+    setTimeout(() => document.body.classList.remove("bg-green-50"), 400);
+}
+
 // Event listener saat DOM loaded
 document.addEventListener('DOMContentLoaded', () => {
   setTheme();

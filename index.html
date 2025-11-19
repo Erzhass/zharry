@@ -97,94 +97,71 @@
     </div>
 
     <script src="assets/script/index.js"></script>
-    <script>
-        // Ambil data dari localStorage
-        let orders = JSON.parse(localStorage.getItem("orders")) || [];
+<script>
+    // Ambil data dari localStorage
+    let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
-        // Fungsi tambah ke keranjang
-        function addToCart(name, price) {
-            const existing = orders.find(item => item.name === name);
-            if (existing) {
-                existing.qty += 1;
-            } else {
-                orders.push({ name, qty: 1, price });
-            }
-            localStorage.setItem("orders", JSON.stringify(orders));
-            renderCart();
-            // Animasi feedback
-            document.body.classList.add("bg-green-50");
-            setTimeout(() => document.body.classList.remove("bg-green-50"), 400);
+    // Fungsi tambah ke keranjang (untuk menu lain)
+    function addToCart(name, price) {
+        const existing = orders.find(item => item.name === name);
+        if (existing) {
+            existing.qty += 1;
+        } else {
+            orders.push({ name, qty: 1, price });
         }
-
-        // Fungsi khusus untuk Teh (dengan pilihan hangat/dingin)
-        function addTeaToCart() {
-            const teaSelect = document.getElementById("teaType");
-            const teaType = teaSelect.value;
-            const price = parseInt(teaSelect.selectedOptions[0].dataset.price);
-            const name = `Teh ${teaType}`; // Nama akan jadi "Teh Hangat" atau "Teh Dingin"
-
-            const existing = orders.find(item => item.name === name);
-            if (existing) {
-                existing.qty += 1;
-            } else {
-                orders.push({ name, qty: 1, price });
-            }
-            localStorage.setItem("orders", JSON.stringify(orders));
-            renderCart();
-            // Animasi feedback
-            document.body.classList.add("bg-green-50");
-            setTimeout(() => document.body.classList.remove("bg-green-50"), 400);
-        }
-
-        // Render keranjang
-        function renderCart() {
-            const cartEl = document.getElementById("cart");
-            const cartItemsEl = document.getElementById("cartItems");
-            const cartTotalEl = document.getElementById("cartTotal");
-            cartItemsEl.innerHTML = "";
-            let total = 0;
-            let totalQty = 0;
-
-            if (orders.length === 0) {
-                cartEl.classList.add("hidden");
-                return;
-            }
-
-            cartEl.classList.remove("hidden");
-            orders.forEach((item, index) => {
-                const subtotal = item.qty * item.price;
-                total += subtotal;
-                totalQty += item.qty;
-                cartItemsEl.innerHTML += `
-                    <div class="flex justify-between items-center py-1 border-b border-gray-200 dark:border-gray-700">
-                        <span>${item.name} (x${item.qty})</span>
-                        <span>Rp ${subtotal.toLocaleString()}</span>
-                        <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700">✕</button>
-                    </div>
-                `;
-            });
-            cartTotalEl.textContent = `Rp ${total.toLocaleString()}`;
-        }
-
-        // Hapus item dari keranjang
-        function removeFromCart(index) {
-            orders.splice(index, 1);
-            localStorage.setItem("orders", JSON.stringify(orders));
-            renderCart();
-        }
-
-        // Checkout ke order.html
-        function checkout() {
-            if (orders.length === 0) {
-                alert("Keranjang kosong!");
-                return;
-            }
-            window.location.href = "order.html";
-        }
-
-        // Render saat load
+        localStorage.setItem("orders", JSON.stringify(orders));
         renderCart();
-    </script>
-</body>
+        // Animasi feedback
+        document.body.classList.add("bg-green-50");
+        setTimeout(() => document.body.classList.remove("bg-green-50"), 400);
+    }
 
-</html>
+    // Render keranjang
+    function renderCart() {
+        const cartEl = document.getElementById("cart");
+        const cartItemsEl = document.getElementById("cartItems");
+        const cartTotalEl = document.getElementById("cartTotal");
+        cartItemsEl.innerHTML = "";
+        let total = 0;
+        let totalQty = 0;
+
+        if (orders.length === 0) {
+            cartEl.classList.add("hidden");
+            return;
+        }
+
+        cartEl.classList.remove("hidden");
+        orders.forEach((item, index) => {
+            const subtotal = item.qty * item.price;
+            total += subtotal;
+            totalQty += item.qty;
+            cartItemsEl.innerHTML += `
+                <div class="flex justify-between items-center py-1 border-b border-gray-200 dark:border-gray-700">
+                    <span>${item.name} (x${item.qty})</span>
+                    <span>Rp ${subtotal.toLocaleString()}</span>
+                    <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700">✕</button>
+                </div>
+            `;
+        });
+        cartTotalEl.textContent = `Rp ${total.toLocaleString()}`;
+    }
+
+    // Hapus item dari keranjang
+    function removeFromCart(index) {
+        orders.splice(index, 1);
+        localStorage.setItem("orders", JSON.stringify(orders));
+        renderCart();
+    }
+
+    // Checkout ke order.html
+    function checkout() {
+        if (orders.length === 0) {
+            alert("Keranjang kosong!");
+            return;
+        }
+        window.location.href = "order.html";
+    }
+
+    // Render saat load
+    renderCart();
+</script>
