@@ -84,6 +84,8 @@ Project ini bebas digunakan untuk belajar, modifikasi, atau tugas sekolah.
 
 ## 🖼️ Preview
 
+assets/img/index.png
+
 ---
 
 ## 👤 Pembuat
