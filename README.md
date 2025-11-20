@@ -71,7 +71,7 @@ Tidak memerlukan server backend — web ini 100% berjalan di sisi frontend.
 Tambahkan screenshot website di folder `screenshots/` lalu tampilkan seperti:
 
 ```
-![Homepage](screenshots/homepage.png)
+![Homepage](assets/img/index.png)
 ```
 
 ---
