@@ -68,7 +68,7 @@ Tidak memerlukan server backend — web ini 100% berjalan di sisi frontend.
 
 ## 🖼️ Screenshot (Opsional)
 
-Tambahkan screenshot website di folder `screenshots/` lalu tampilkan seperti:
+Tambahkan screenshot website di folder `assets/img/ ` lalu tampilkan seperti:
 
 ```
 ![Homepage](assets/img/index.png)
