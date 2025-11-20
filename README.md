@@ -18,17 +18,35 @@ Web sederhana berbasis HTML, TailwindCSS, dan JavaScript untuk mensimulasikan si
 ## 🗂 Struktur Folder
 
 ```
-zharry/
-│
-├── index.html        → Halaman utama
-├── order.html        → Form pemesanan
-├── confirm.html      → Halaman konfirmasi
+
+|zharry/
 │
 ├── assets/
-│   ├── style/style.css  → Custom CSS
-│   └── img/             → (jika ada gambar)
+│ ├── css/
+│ │ └── style.css
+│ └── img/
+│ ├── air mineral.jpeg
+│ ├── americano.jpeg
+│ ├── back.png
+│ ├── cappucino.jpeg
+│ ├── coffe expreso.jpeg
+│ ├── confirm.png
+│ ├── index.png
+│ ├── index+chekout.png
+│ ├── indexx.png
+│ ├── latte.jpeg
+│ ├── order.png
+│ └── teh.jpeg
 │
-└── js/ (opsional jika ditambahkan script)
+├── script/
+│ ├── confirm.js
+│ ├── index.js
+│ └── order.js
+│
+├── index.html
+├── order.html
+├── confirm.html
+└── README.md
 ```
 
 ---
