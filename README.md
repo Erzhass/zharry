@@ -85,7 +85,7 @@ Project ini bebas digunakan untuk belajar, modifikasi, atau tugas sekolah.
 ## 🖼️ Preview
 
 <p align="center">
-  <img src="assets/img/index.png" width="600" />
+  <img src="assets/img/indexx.png" width="600" />
 </p>
 
 ---
