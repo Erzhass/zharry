@@ -96,3 +96,8 @@ Project ini bebas digunakan untuk belajar, modifikasi, atau tugas sekolah.
 
 - Email: [falzagaming12@gmail.com](mailto:falzagaming12@gmail.com)
 - GitHub: [https://github.com/Erzhass](https://github.com/Erzhass)
+
+**Ferry Ferdianto**
+
+- Email: [ferryferdianto1624@gmail.com](mailto:ferryferdianto1624@gmail.com)
+- GitHub: [https://github.com/FerryFerdianto24](https://github.com/FerryFerdianto24)
