@@ -82,6 +82,10 @@ Project ini bebas digunakan untuk belajar, modifikasi, atau tugas sekolah.
 
 ---
 
+## 🖼️ Preview
+
+---
+
 ## 👤 Pembuat
 
 **Erzha Noverico Ardheva**
